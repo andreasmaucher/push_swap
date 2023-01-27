@@ -79,7 +79,6 @@ int main()
 
 	tmp = find_node(head, 13); //find number 13
 	printf("found %d\n", tmp->value);
-
 	insert_after_node(tmp, create_new_node(75));//insert 75
 
 	printlist(head);
