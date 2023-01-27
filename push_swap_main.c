@@ -19,10 +19,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 
-struct node 
+struct node
 {
-	int value;
-	struct node* next; //this is pointing to the next node in the list
+	void *value;
+	struct node *next; //this is pointing to the next node in the list
 };
 typedef struct node node_t; //so we don't have to type struct all the time
 
@@ -74,14 +74,20 @@ int	main(int ac, char **av)
 		}
 		//printf("%s", av[1]);
 	}
-
+/*
 	while (arr[i] != NULL)
 	{
 		int tmp = arr[i];
 		i++;
 	}
+	*/
 // i could work split into new node
-
+	/* while (arr[i] != NULL)
+	{
+		tmp = create_new_node(i);
+		tmp->next = head;
+		insert_at_head(&head, tmp);
+	} */
 	for (int i=0; i < 25; i++) //I could say while i smaller than the number of digits given
 	{
 		tmp = create_new_node(i);
