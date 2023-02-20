@@ -73,7 +73,7 @@ int	ft_lstsize(node_t *lst) //length of list
 	return (ret);
 }
 //! funktioniert nicht
-void	ft_swap_a(node_t *temp_head_a, node_t *head_a)
+/* void	ft_swap_a(node_t *temp_head_a, node_t *head_a)
 {
 	//temp_head_a = head_a; // to temporary store the value of head a
 	//printf("%i", (head_a->value));
@@ -82,7 +82,7 @@ void	ft_swap_a(node_t *temp_head_a, node_t *head_a)
 	printlist(head_a);
 	insert_after_node(head_a, create_new_node(temp_head_a->value)); //create_new_node(temp_head_a->value)
 	//printf("%i", (head_a->value));
-}
+} */
 
 int main(int ac, char **av)
 {
@@ -108,12 +108,12 @@ int main(int ac, char **av)
 	}
 	printlist(head_a);
 	temp_head_a = head_a;
-	ft_swap_a(temp_head_a, head_a);
+	//ft_swap_a(temp_head_a, head_a);
 	//! swap funktioniert hier
-	/* temp_head_a = head_a; // to temporary store the value of head a
+	temp_head_a = head_a; // to temporary store the value of head a
 	head_a = head_a->next; //head_a now points to the second value
 	insert_after_node(head_a, create_new_node(temp_head_a->value));
-	printlist(head_a); */
+	printlist(head_a);
 	/* digits = ft_lstsize(head_a); //can't work with ac because length of list varies
 	secondpos = head_a;
 	secondpos = secondpos->next;
