@@ -26,11 +26,19 @@ struct node
 };
 typedef struct node node_t; //so we don't have to type struct all the time
 
-node_t	*insert_at_head(node_t **head, node_t *node_to_insert) //we use a double pointer because we want to change the value of a pointer
+node_t	*insert_at_head(node_t *head, int new_value) //we use a double pointer because we want to change the value of a pointer
 {
-	node_to_insert->next = *head;
-	*head = node_to_insert;
-	return node_to_insert;
+	node_t new_head;
+
+	new_head = malloc(sizeof(node_t));
+	new_head->value = new_value;
+	if (head == NULL)
+		return (new_head);
+	else
+	{
+		new_head->next = head;
+		return (new_head);
+	}
 }
 
 node_t	*create_new_node(int value)

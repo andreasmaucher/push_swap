@@ -14,16 +14,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-//TODO implement swap sequence: Store last number in temp, delete last node
-//! I could also just swap the data no need to change the links! (&free the temp storage variables again)
-// Copy head to temp, add temp as last node, add last number as head and delete old head
-
-/* 1. Copy head value to temp;
-2. Copy tail value to temp;
-3. Delete tail
-4. Add head value as new tail node;
-5. Add tail value as second node? and then in the next step delete & free old head and make 2nd new head OR
-6.  */
+//TODO implement other operations, mainly swap first two nodes
+/* then open up stack b
+once all operators are done think about how to start algorithm logic 
+try it out for 3 digits, where I can basically hardcode the solution
+structure my code */
 
 int	ft_atoi(const char *nptr);
 
@@ -42,17 +37,31 @@ node_t	*create_new_node(int value)
 	return newnode;
 }
 
-node_t	*insert_at_head(node_t **head, node_t *node_to_insert) //we use a double pointer because we want to change the value of a pointer
+node_t *new_list_insert_at_head(node_t **head, node_t *node_to_insert) //we use a double pointer because we want to change the value of a pointer
 {
 	node_to_insert->next = *head;
 	*head = node_to_insert;
-	return node_to_insert;
+	return (node_to_insert);
 }
 
-node_t *delete_at_head(node_t *head)
+node_t	*insert_at_head(node_t *head, int new_value) //we use a double pointer because we want to change the value of a pointer
 {
-	node_t *new_head = head->next;
-	free(head);
+	node_t *new_head;
+
+	new_head = create_new_node(new_value);
+	if (head == NULL)
+		return (new_head);
+	else
+	{
+		new_head->next = head;
+		return (new_head);
+	}
+}
+
+node_t *delete_at_head(node_t *old_head)
+{
+	node_t *new_head = old_head->next;
+	free(old_head);
 	return (new_head);
 }
 
@@ -106,7 +115,7 @@ int	lst_size(node_t *head)
 	return (lsize);
 }
 
-int return_tail_value(node_t *head)
+node_t *return_tail_value(node_t *head)
 {
 	node_t *current_node_pos;
 	//node_t *temp_tail;
@@ -114,45 +123,15 @@ int return_tail_value(node_t *head)
 
 	current_node_pos = head;
 	lsize = lst_size(head);
-	while (lsize > 2) //?bin ich bei Ende des Loops bereits hinter dem letzten Node im Nirgendwo?
+	while (lsize > 1)
 	{
 		current_node_pos = current_node_pos->next;
 		lsize--;
 	}
 	//temp_tail = current_node_pos;
-	printf("%d", current_node_pos->value);
-	return (current_node_pos->value);
+	//printf("%d", current_node_pos->value);
+	return (current_node_pos);
 }
-
-//does go to last node make any sense? I need to combine it with an action step like delete, otherwise what am I returning without an index?
-/* node_t *go_to_last_node(node_t *head)
-{
-	int lsize;
-	node_t *current_node_pos;
-
-	current_node_pos = head;
-	lsize = lst_size(head);
-	while (lsize >= 1)
-	{
-		current_node_pos = current_node_pos->next;
-		lsize--;
-	}
-	return (current_node_pos->value)
-} */
-//!swap
-/* node_t *swap(node_t **head)
-{
-	node_t *temp_head;
-	node_t *temp_tail;
-	
-	temp_head = head;
-	temp_tail = return_tail_value(head);
-	head = delete_at_tail(head);
-	head = insert_at_tail(head, temp_tail->value); //?does this work?!
-	head = delete_at_head(head);
-	head = insert_at_head(&head, temp_head);
-	write(1, "sa", 2); //to display message on screen
-} */
 
 void	printlist(node_t *head) //we pass the head so we know when to start
 {
@@ -164,6 +143,96 @@ void	printlist(node_t *head) //we pass the head so we know when to start
 		temporary = temporary->next;
 	}
 	printf("\n");
+}
+/* 
+node_t *value_of_second_node(node_t *head)
+{
+	node_t *
+} */
+
+node_t *delete_second_node(node_t *head)
+{
+	node_t *current;
+	node_t *prev;
+
+	current = malloc(sizeof(node_t));
+	if (current == NULL)
+		return (NULL);
+	current = head;
+	prev = malloc(sizeof(node_t));
+	if (prev == NULL)
+		return (NULL);
+	prev = NULL;
+
+	while (current->next != NULL)
+	{
+		prev = current;
+		current = current->next;
+	}
+	prev->next = NULL;
+	free(current);
+	return (head);
+}
+//! RULE sa / sb swap first two elements
+node_t *swap_a(node_t *head)
+{
+	node_t *old_head;
+	node_t *new_second_node;
+
+	/* do nothing if there is only one or no elements*/
+	if (head->next != NULL && head != NULL) //? does this work?
+	{
+		old_head = head; //to save the old head & be able to free it later
+		head = head->next; //set 2nd node as new head
+		new_second_node = create_new_node(old_head->value);
+		new_second_node->next = head->next; //next pointer of new node points now to the old second node (head->next is still 2nd node until here!)
+		head->next = new_second_node; //head now points to the new second node
+		free(old_head);
+	}
+	return (head);
+}
+
+//! RULE ra / rb rotate so that the first element becomes the last one
+node_t *rotate(node_t *head)
+{
+	node_t *temp_head;
+	
+	temp_head = head;
+	head = insert_at_tail(head, temp_head->value);
+	head = delete_at_head(head);
+	//write(1, "sa", 2); //to display message on screen */
+	return (head);
+}
+
+//! RULE rra / rrb reverse rotate so that the last element becomes the first one
+node_t *reverse_rotate(node_t *head)
+{
+	node_t *temp_tail;
+	
+	temp_tail = return_tail_value(head);
+	head = insert_at_head(head, temp_tail->value);
+	head = delete_at_tail(head);
+	//write(1, "sa", 2); //to display message on screen */
+	return (head);
+}
+
+node_t *swap(node_t *head)
+{
+	node_t *temp_head;
+	node_t *temp_tail;
+	int tail;
+	
+	temp_head = malloc(sizeof(node_t)); //! protect malloc!
+	temp_tail = malloc(sizeof(node_t));
+	temp_head = head;
+	temp_tail = return_tail_value(head); //! this does not work last node changed already!
+	tail = temp_tail->value;
+	head = delete_at_tail(head);
+	head = insert_at_tail(head, temp_head->value);
+	head = delete_at_head(head);
+	head = insert_at_head(head, tail);
+	//write(1, "sa", 2); //to display message on screen */
+	return (head);
 }
 /* 
 void	freememory(node_t *head)
@@ -196,24 +265,18 @@ int	main(int ac, char **av)
 		input = ft_atoi(av[i]);
 		tmp_a = create_new_node(input);
 		tmp_a->next = head_a;
-		insert_at_head(&head_a, tmp_a);
+		new_list_insert_at_head(&head_a, tmp_a);
 		i--; //last input number is first added as head
 	}
 	printlist(head_a);
-	//head_a = delete_at_head(head_a);
-	//insert_at_head(&head_a, test); //need to run it like the loop above, what is the trigger?
-	/* printlist(head_a);
-	head_a = delete_at_tail(head_a);
-	printlist(head_a);
-	head_a = insert_at_tail(head_a, 5);
+	/* head_a = swap(head_a);
 	printlist(head_a); */
-	//go_to_last_node(head_a);
-	/* lsize = lst_size(head_a);
-	printf("%d", lsize); */
-	//temp_tail = malloc(sizeof(node_t));
-	//temp_tail = return_tail_value(head_a);
-	temp = return_tail_value(head_a);
-	//printf("%d", temp_tail->value); //?does not work in this case because theres no head
+	/* head_a = swap_a(head_a);
+	printlist(head_a); */
+	/* head_a = rotate(head_a);
+	printlist(head_a); */
+	head_a = reverse_rotate(head_a);
+	printlist(head_a);
 	}
 
 

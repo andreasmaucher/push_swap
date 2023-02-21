@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   toupper.c                                          :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaucher <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 17:31:44 by amaucher          #+#    #+#             */
-/*   Updated: 2022/11/30 17:31:46 by amaucher         ###   ########.fr       */
+/*   Created: 2023/02/21 12:08:07 by amaucher          #+#    #+#             */
+/*   Updated: 2023/02/21 12:08:09 by amaucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-int	ft_toupper(int c)
-{
-	if (c >= 97 && c <= 122)
-	{
-		c = c - 32;
-	}
-	return (c);
-}
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+char	*get_next_line(int fd);
+char	*ft_strchr(const char *string, int searchedChar );
+char	*ft_strjoin(char const *s1, char const *s2);
+
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t elementCount, size_t elementSize);
+
+size_t	ft_strlen(const char *theString);
+
+#endif
