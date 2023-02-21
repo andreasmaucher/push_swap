@@ -17,13 +17,35 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-char	*get_next_line(int fd);
-char	*ft_strchr(const char *string, int searchedChar );
-char	*ft_strjoin(char const *s1, char const *s2);
+struct	node
+{
+	int	value;
+	struct node *next; //a node is a structure (data & link parts) this must be a pointer to a struct
+};
+typedef struct node node_t;
 
-void	ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t elementCount, size_t elementSize);
+/*main*/
+int	main(int ac, char **av);
 
-size_t	ft_strlen(const char *theString);
+/*utils*/
+int	ft_atoi(const char *nptr);
+
+/*list operators*/
+node_t	*create_new_node(int value);
+node_t *new_list_insert_at_head(node_t **head, node_t *node_to_insert);
+node_t	*insert_at_head(node_t *head, int new_value);
+node_t *delete_at_head(node_t *old_head);
+node_t *insert_at_tail(node_t *head, int new_value);
+node_t *delete_at_tail(node_t *head);
+int	lst_size(node_t *head);
+node_t *return_tail_value(node_t *head);
+void	printlist(node_t *head);
+node_t *delete_second_node(node_t *head);
+
+/*rules*/
+node_t *swap_a(node_t *head);
+node_t *rotate(node_t *head);
+node_t *reverse_rotate(node_t *head);
+node_t *swap(node_t *head);
 
 #endif
