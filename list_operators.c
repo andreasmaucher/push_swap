@@ -12,6 +12,8 @@
 
 #include "push_swap.h"
 
+//! Not more than 6 functions?
+
 node_t	*create_new_node(int value)
 {
 	node_t *newnode = malloc(sizeof(node_t));
@@ -67,9 +69,7 @@ node_t *delete_at_tail(node_t *head)
 	node_t *current;
 	node_t *prev;
 
-	current = malloc(sizeof(node_t));
 	current = head;
-	prev = malloc(sizeof(node_t));
 	prev = NULL;
 
 	while (current->next != NULL)
@@ -101,7 +101,7 @@ int	lst_size(node_t *head)
 node_t *return_tail_value(node_t *head)
 {
 	node_t *current_node_pos;
-	//node_t *temp_tail;
+
 	int lsize;
 
 	current_node_pos = head;
@@ -111,8 +111,6 @@ node_t *return_tail_value(node_t *head)
 		current_node_pos = current_node_pos->next;
 		lsize--;
 	}
-	//temp_tail = current_node_pos;
-	//printf("%d", current_node_pos->value);
 	return (current_node_pos);
 }
 

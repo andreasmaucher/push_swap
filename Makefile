@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = main.c list_operators.c push_swap_utils.c rules.c \
+SRCS = main.c list_operators.c push_swap_utils.c rules.c sorter.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -18,7 +18,7 @@ CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -I.
 
-NAME = push_swap.a
+NAME = push_swap
 
 all: $(NAME)
 

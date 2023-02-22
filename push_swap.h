@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 struct	node
 {
@@ -28,6 +29,8 @@ typedef struct node node_t;
 int	main(int ac, char **av);
 
 /*utils*/
+bool	check_if_sorted(node_t *head);
+void	freememory(node_t *head);
 int	ft_atoi(const char *nptr);
 
 /*list operators*/
@@ -47,5 +50,8 @@ node_t *swap_a(node_t *head);
 node_t *rotate(node_t *head);
 node_t *reverse_rotate(node_t *head);
 node_t *swap(node_t *head);
+
+/*sorter*/
+node_t *three_sorter(node_t *head);
 
 #endif

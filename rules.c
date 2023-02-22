@@ -28,6 +28,7 @@ node_t *swap_a(node_t *head)
 		head->next = new_second_node; //head now points to the new second node
 		free(old_head);
 	}
+	write(1, "sa\n", 3);
 	return (head);
 }
 
@@ -39,7 +40,7 @@ node_t *rotate(node_t *head)
 	temp_head = head;
 	head = insert_at_tail(head, temp_head->value);
 	head = delete_at_head(head);
-	//write(1, "sa", 2); //to display message on screen */
+	write(1, "ra\n", 3);
 	return (head);
 }
 
@@ -51,7 +52,7 @@ node_t *reverse_rotate(node_t *head)
 	temp_tail = return_tail_value(head);
 	head = insert_at_head(head, temp_tail->value);
 	head = delete_at_tail(head);
-	//write(1, "sa", 2); //to display message on screen */
+	write(1, "rra\n", 4);
 	return (head);
 }
 

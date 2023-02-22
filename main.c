@@ -12,24 +12,17 @@
 
 #include "push_swap.h"
 
+node_t *three_sorter(node_t *head);
+
 //TODO implement other operations, mainly swap first two nodes
 /* then open up stack b
 once all operators are done think about how to start algorithm logic 
 try it out for 3 digits, where I can basically hardcode the solution
 structure my code */
+/* if 3 values check the sorting in the list which one is bigger etc*/
+/* then do a bunch of if conditions*/
+/* if more than x values open up stack B*/
 
-/* 
-void	freememory(node_t *head)
-{
-	node_t *current = head;
-
-	while (current != NULL)
-	{
-		free(current->next);
-		//current = current->next;
-	}
-}
- */
 int	main(int ac, char **av)
 {
 	node_t	*head_a;
@@ -37,7 +30,11 @@ int	main(int ac, char **av)
 	int	i;
 	int input;
 
-	head_a = malloc(sizeof(node_t));
+	/* if no parameters specified give control back to the user */
+	if (ac == 1)
+		return (0);
+	//TODO: in case of error display "Error\n"
+	//TODO: each value is only allowed once
 	head_a = NULL;
 	i = ac-1; // ac -1 because av index starts at 0
 	while (i >= 1)
@@ -49,14 +46,12 @@ int	main(int ac, char **av)
 		i--; //last input number is first added as head
 	}
 	printlist(head_a);
-	/* head_a = swap(head_a);
-	printlist(head_a); */
-	/* head_a = swap_a(head_a);
-	printlist(head_a); */
-	/* head_a = rotate(head_a);
-	printlist(head_a); */
-	head_a = reverse_rotate(head_a);
-	printlist(head_a);
+	if (check_if_sorted(head_a) == false)
+	{
+		//! for 3 digits
+		if (ac <= 4)
+			head_a = three_sorter(head_a);
+		printlist(head_a);
 	}
-
-
+	freememory(head_a);
+	}
