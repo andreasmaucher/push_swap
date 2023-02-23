@@ -26,32 +26,25 @@ structure my code */
 int	main(int ac, char **av)
 {
 	node_t	*head_a;
-	node_t	*tmp_a;
 	int	i;
-	int input;
 
 	/* if no parameters specified give control back to the user */
 	if (ac == 1)
 		return (0);
 	//TODO: in case of error display "Error\n"
 	//TODO: each value is only allowed once
-	head_a = NULL;
+	head_a = NULL; // important, head must always point to NULL
 	i = ac-1; // ac -1 because av index starts at 0
-	while (i >= 1)
-	{	
-		input = ft_atoi(av[i]);
-		tmp_a = create_new_node(input);
-		tmp_a->next = head_a;
-		new_list_insert_at_head(&head_a, tmp_a);
-		i--; //last input number is first added as head
-	}
+	head_a = create_new_list(head_a, i, av);
 	printlist(head_a);
 	if (check_if_sorted(head_a) == false)
 	{
 		//! for 3 digits
 		if (ac <= 4)
 			head_a = three_sorter(head_a);
+		if (ac <= 6 && ac > 4)
+			head_a = five_sorter(head_a);
 		printlist(head_a);
 	}
 	freememory(head_a);
-	}
+}

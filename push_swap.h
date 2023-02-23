@@ -44,14 +44,22 @@ int	lst_size(node_t *head);
 node_t *return_tail_value(node_t *head);
 void	printlist(node_t *head);
 node_t *delete_second_node(node_t *head);
+node_t	*create_new_list(node_t *head, int i, char **av);
 
 /*rules*/
 node_t *swap_a(node_t *head);
-node_t *rotate(node_t *head);
-node_t *reverse_rotate(node_t *head);
+node_t *swap_b(node_t *head);
+node_t *rotate_a(node_t *head);
+node_t *rotate_b(node_t *head);
+node_t *reverse_rotate_a(node_t *head);
+node_t *reverse_rotate_b(node_t *head);
 node_t *swap(node_t *head);
+node_t *push_to_b(node_t *head_b, node_t *head_a);
+node_t *push_to_a(node_t *head_b, node_t *head_a);
 
 /*sorter*/
 node_t *three_sorter(node_t *head);
+node_t *five_sorter(node_t *head_a);
+node_t	*five_sorter_add_two(node_t *head);
 
 #endif

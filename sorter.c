@@ -14,20 +14,85 @@
 
 node_t *three_sorter(node_t *head)
 {
-	node_t	*second_node;
-	node_t	*tail_node;
+	node_t	*second;
+	node_t	*tail;
 	
 	while (check_if_sorted(head) == false)
 	{
-		second_node = head->next;
-		if (second_node->value > tail_node->value)
-			head = rotate(head);
-		second_node = head->next;
-		if (head->value > second_node->value)
+		tail = return_tail_value(head);
+		second = head->next;
+		if (head->value < tail->value && head->value > second->value && second->value < tail->value)
 			head = swap_a(head);
-		tail_node = return_tail_value(head);
-		if (head->value > tail_node->value)
-			head = reverse_rotate(head);
+		if (head->value > tail->value && head->value > second->value && second->value > tail->value)
+		{
+			head = swap_a(head);
+			head = reverse_rotate_a(head);
+		}
+		if (head->value > tail->value && head->value > second->value && second->value < tail->value)
+			head = rotate_a(head);
+		if (head->value < tail->value && head->value < second->value && second->value > tail->value)
+		{
+			head = swap_a(head);
+			head = rotate_a(head);
+		}
+		if (head->value > tail->value && head->value < second->value && second->value > tail->value)
+			head = reverse_rotate_a(head);
 	}
 	return(head);
+}
+
+node_t	*five_sorter_add_two(node_t *head)
+{
+	node_t	*second;
+	node_t	*third;
+	node_t	*tail;
+
+	second = head->next;
+	third = second->next;
+	if (head->value > second->value && head->value < third->value) //if number belongs to 2nd pos
+		head = swap_a(head);
+	tail = return_tail_value(head);
+	third = second->next;
+	if (head->value < tail->value && head->value > third->value)
+	{
+		head = reverse_rotate_a(head);
+		head = swap_a(head);
+		head = rotate_a(head);
+		head = rotate_a(head);
+	}
+	tail = return_tail_value(head);
+	if (head->value > tail->value)
+		head = rotate_a(head);
+	return (head);
+}
+
+node_t *five_sorter(node_t *head_a)
+{
+	node_t	*head_b;
+	node_t	*tmp;
+	int	counter;
+
+	counter = 2;
+	/* first time creating list b! */
+	head_b = NULL;
+	tmp = head_a;
+	tmp = create_new_node(tmp->value);
+	tmp->next = head_b;
+	/* push first two nodes of a to b to be able to apply three_sort logic */
+	while (counter-- > 0)
+	{
+		head_b = push_to_b(head_b, head_a);
+		head_a = delete_at_head(head_a);
+	}
+	printlist(head_b);
+	head_a = three_sorter(head_a);
+	counter = 2;
+	while (counter-- > 0)
+	{
+		head_a = push_to_a(head_a, head_b);
+		head_b = delete_at_head(head_b);
+		head_a = five_sorter_add_two(head_a);
+	}
+	free (tmp);
+	return (head_a);
 }

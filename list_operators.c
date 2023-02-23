@@ -114,6 +114,7 @@ node_t *return_tail_value(node_t *head)
 	return (current_node_pos);
 }
 
+//! this is only for testing, comment out before submitting!
 void	printlist(node_t *head) //we pass the head so we know when to start
 {
 	node_t *temporary = head; //this is a temporary pointer set to the start of the head pointer
@@ -147,5 +148,22 @@ node_t *delete_second_node(node_t *head)
 	}
 	prev->next = NULL;
 	free(current);
+	return (head);
+}
+
+/* to create the new list from scratch*/
+node_t	*create_new_list(node_t *head, int i, char **av)
+{
+	node_t	*tmp;
+	int	input;
+
+	while (i >= 1)
+	{	
+		input = ft_atoi(av[i]);
+		tmp = create_new_node(input);
+		tmp->next = head;
+		new_list_insert_at_head(&head, tmp);
+		i--; //last input number is first added as head
+	}
 	return (head);
 }
