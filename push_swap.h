@@ -33,6 +33,7 @@ int	main(int ac, char **av);
 bool	check_if_sorted(node_t *head);
 void	freememory(node_t *head);
 int	ft_atoi(const char *nptr);
+int rotate_counter(node_t *head, int min_max);
 
 /*list operators*/
 node_t	*create_new_node(int value);

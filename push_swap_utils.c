@@ -56,29 +56,46 @@ node_t	*insertion(node_t *head_a)
 	node_t	*head_b;
 	node_t	*tmp;
 	int	min;
+	int	ra_count;
+	int	lsize;
 
 	head_b = NULL;
 	tmp = head_a;
 	tmp = create_new_node(tmp->value);
 	tmp->next = head_a;
 	//create b
-	while (check_if_sorted(head_a) == false)
+	while (check_if_sorted(head_a) == false) //! need another condition
 	{	
 		min = find_smallest_number(head_a);
-		while (head_a->value != min)
-			head_a = rotate_a(head_a);
+		/* optimization: find shortest path for rotate vs. reverse_rotate*/
+		ra_count = rotate_counter(head_a, min);
+		lsize = lst_size(head_a);
+		if (ra_count <= lsize/2)
+		{
+			while (head_a->value != min)
+				head_a = rotate_a(head_a);
+		}
+		else if (ra_count > lsize/2)
+		{
+			while (head_a->value != min)
+				head_a = reverse_rotate_a(head_a);
+		}
 		head_b = push_to_b(head_b, head_a);
-		head_a = delete_at_head(head_a); //! this needs to be part of rule!
+		head_a = delete_at_head(head_a);
+		lsize = lst_size(head_a);
+		if (lsize == 5)
+			head_a = five_sorter(head_a);
 		if (head_a == NULL)
 			break;
 	}
 	while (head_b != NULL)
 	{
 		head_a = push_to_a(head_a, head_b);
-		head_b = delete_at_head(head_b); //! this needs to be part of rule!
+		head_b = delete_at_head(head_b);
 	}
 	printlist(head_a);
 	printlist(head_b);
+	free(tmp);
 	return (head_a);
 }
 
@@ -99,6 +116,22 @@ bool	check_if_sorted(node_t *head)
 			return (false);
 	}
 	return (true);
+}
+
+/* count rotations */
+int rotate_counter(node_t *head, int min_max)
+{
+	node_t *temp_head;
+	int	counter;
+	
+	counter = 0;
+	temp_head = head;
+	while (temp_head->value != min_max)
+	{
+		temp_head = temp_head->next;
+		counter++;
+	}
+	return (counter);
 }
 
 /* to free up all memory in the end; it is not possible to go from tail to head*/

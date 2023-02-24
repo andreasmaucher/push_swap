@@ -108,6 +108,7 @@ node_t *push_to_b(node_t *head_b, node_t *head_a)
 	/* tmp = create_new_node(tmp->value);
 	tmp->next = head_b; */
 	head_b = insert_at_head(head_b, tmp->value);
+	//head_a = delete_at_head(head_a); not possible, because I only have one return value
 	write(1, "pb\n", 3);
 	return (head_b);
 }
