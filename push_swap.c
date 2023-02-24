@@ -12,8 +12,6 @@
 
 #include "push_swap.h"
 
-node_t *three_sorter(node_t *head);
-
 //TODO implement other operations, mainly swap first two nodes
 /* then open up stack b
 once all operators are done think about how to start algorithm logic 
@@ -39,11 +37,12 @@ int	main(int ac, char **av)
 	printlist(head_a);
 	if (check_if_sorted(head_a) == false)
 	{
-		//! for 3 digits
 		if (ac <= 4)
 			head_a = three_sorter(head_a);
 		if (ac <= 6 && ac > 4)
 			head_a = five_sorter(head_a);
+		if (ac > 6)
+			head_a = insertion(head_a);
 		printlist(head_a);
 	}
 	freememory(head_a);

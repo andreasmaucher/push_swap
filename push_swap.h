@@ -17,6 +17,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <limits.h>
 
 struct	node
 {
@@ -61,5 +62,10 @@ node_t *push_to_a(node_t *head_b, node_t *head_a);
 node_t *three_sorter(node_t *head);
 node_t *five_sorter(node_t *head_a);
 node_t	*five_sorter_add_two(node_t *head);
+
+/*insertion*/
+int	find_smallest_number(node_t *head);
+int	find_largest_number(node_t *head);
+node_t	*insertion(node_t *head_a);
 
 #endif
