@@ -34,6 +34,7 @@ bool	check_if_sorted(node_t *head);
 void	freememory(node_t *head);
 int	ft_atoi(const char *nptr);
 int rotate_counter(node_t *head, int min_max);
+node_t	*find_shortest_rotation_path(node_t *head_a, int	min, int	ra_count);
 
 /*list operators*/
 node_t	*create_new_node(int value);
@@ -47,6 +48,8 @@ node_t *return_tail_value(node_t *head);
 void	printlist(node_t *head);
 node_t *delete_second_node(node_t *head);
 node_t	*create_new_list(node_t *head, int i, char **av);
+node_t *return_next_chunk_value(node_t *head);
+node_t *return_second_last_value(node_t *head);
 
 /*rules*/
 node_t *swap_a(node_t *head);
@@ -66,6 +69,7 @@ node_t	*five_sorter_add_two(node_t *head);
 
 /*insertion*/
 int	find_smallest_number(node_t *head);
+int	find_second_smallest_number(node_t *head_a, int min);
 int	find_largest_number(node_t *head);
 node_t	*insertion(node_t *head_a);
 

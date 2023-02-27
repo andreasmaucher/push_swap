@@ -114,6 +114,43 @@ node_t *return_tail_value(node_t *head)
 	return (current_node_pos);
 }
 
+node_t *return_second_last_value(node_t *head)
+{
+	node_t *current_node_pos;
+
+	int lsize;
+
+	current_node_pos = head;
+	lsize = lst_size(head);
+	/* lsize >2 to avoid the last node*/
+	while (lsize > 2)
+	{
+		current_node_pos = current_node_pos->next;
+		lsize--;
+	}
+	return (current_node_pos);
+}
+
+node_t *return_next_chunk_value(node_t *head)
+{
+	node_t *current_node_pos;
+	int	upper_limit;
+	int	lower_limit;
+
+	int lsize;
+
+	upper_limit = 20;
+	lower_limit = 0;
+	current_node_pos = head;
+	lsize = lst_size(head);
+	while (current_node_pos != NULL && current_node_pos->value >= upper_limit && current_node_pos->value < lower_limit)
+	{
+		current_node_pos = current_node_pos->next;
+		// if head = Null increase bounds until found? or do formula right away
+	}
+	return (current_node_pos);
+}
+
 //! this is only for testing, comment out before submitting!
 void	printlist(node_t *head) //we pass the head so we know when to start
 {
