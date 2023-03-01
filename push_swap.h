@@ -34,7 +34,10 @@ bool	check_if_sorted(node_t *head);
 void	freememory(node_t *head);
 int	ft_atoi(const char *nptr);
 int rotate_counter(node_t *head, int min_max);
+int	reverse_rotate_counter(node_t *head, int target);
 node_t	*find_shortest_rotation_path(node_t *head_a, int	min, int	ra_count);
+int	find_smallest_from_top(node_t *head, int ceiling);
+int	find_smallest_from_bottom(node_t *head, int ceiling);
 
 /*list operators*/
 node_t	*create_new_node(int value);

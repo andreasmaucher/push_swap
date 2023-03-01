@@ -66,22 +66,72 @@ int	find_second_smallest_number(node_t *head, int min)
 	return (second_min);
 }
 
+int	find_smallest_from_top(node_t *head, int ceiling)
+{
+	node_t	*tmp;
+	int	first_min;
+	int	counter;
+	int	lsize;
+
+	counter = 0;
+	tmp = head;
+	lsize = lst_size(head);
+	while (tmp != NULL)
+	{
+		if (tmp->value < ceiling)
+			first_min = tmp->value;
+		tmp = tmp->next;
+		counter++;
+		/* we do not want to find the lowest value in all of the stack but only in the first half */
+		if (counter > lsize/2)
+			break;
+	}
+	return (first_min);
+}
+
+int	find_smallest_from_bottom(node_t *head, int ceiling)
+{
+	node_t	*tmp;
+	node_t	*last_node;
+	int	last_min;
+
+	tmp = head;
+	last_node = return_tail_value(tmp);
+	while (last_node->value != tmp->value)
+	{
+		if (last_node->value < ceiling)
+		{
+			last_min = last_node->value;
+			return (last_min);
+		}
+		tmp = delete_at_tail(tmp);
+		last_node = return_tail_value(tmp);
+	}
+	return (0);
+}
+
 //! ALGORITHM
 node_t	*insertion(node_t *head_a)
 {
 	node_t	*head_b;
 	node_t	*tmp;
-	node_t	*second;
+	/* node_t	*second;
 	node_t	*tail;
-	node_t	*second_last;
+	node_t	*second_last; */
 	int	min;
-	int	two_min;
+	//int	two_min;
 	int	lsize;
-	int	chunk_n;
+	/* int	chunk_n;
 	int counter;
 	int	ra_count_min;
-	int	ra_count_two_min;
-	int	lsize_b;
+	int	ra_count_two_min; */
+	//int	lsize_b;
+	int ratio;
+	int	ceiling;
+	int	ra_count_top;
+	int	rra_count_bottom;
+	int top_min;
+	int	bottom_min;
 
 	head_b = NULL;
 	tmp = head_a;
@@ -91,13 +141,31 @@ node_t	*insertion(node_t *head_a)
 	while (check_if_sorted(head_a) == false) //! need another condition because I want to have a completely empty!
 	{	
 		lsize = lst_size(head_a);
+		ratio = lsize/7.14;
+		min = find_smallest_number(head_a);
+		ceiling = min + (ratio*2);
+		top_min = find_smallest_from_top(head_a, ceiling);
+		printf("%d\n", top_min);
+		bottom_min = find_smallest_from_bottom(head_a, ceiling);
+		printf("%d\n", bottom_min);
+		/* how many rotations to bring min value in the first half of the stack to the top */
+		ra_count_top = rotate_counter(head_a, top_min);
+		rra_count_bottom = reverse_rotate_counter(head_a, bottom_min);
+		printf("%d", rra_count_bottom);
+		/* find shortest path, at the end target value is on top !!! could be restructured */
+		if (ra_count_top < rra_count_bottom)
+			head_a = find_shortest_rotation_path(head_a, top_min, ra_count_top); //! change ra_count logic MISTAKE use reverse_rotate function just without counter and return head
+		else if (ra_count_top > rra_count_bottom)
+			head_a = find_shortest_rotation_path(head_a, bottom_min, rra_count_bottom);
+		head_b = push_to_b(head_b, head_a);
+		head_a = delete_at_head(head_a);
 		//!!!! chunk logic still mising!
-		chunk_n = 5; //! implement separate function to adjust chunks based on n=100 4 chunks, for n=500 11 chunks etc.
+		/* chunk_n = 5; //! implement separate function to adjust chunks based on n=100 4 chunks, for n=500 11 chunks etc.
 		counter = lsize/chunk_n; //amount of digits in each chunk
 		min = find_smallest_number(head_a);
-		two_min = find_second_smallest_number(head_a, min);
+		two_min = find_second_smallest_number(head_a, min); */
 		/* optimization: find shortest path for rotate vs. reverse_rotate*/
-		ra_count_min = rotate_counter(head_a, min);
+		/* ra_count_min = rotate_counter(head_a, min);
 		ra_count_two_min = rotate_counter(head_a, two_min);
 		if (ra_count_min < ra_count_two_min)
 			head_a = find_shortest_rotation_path(head_a, min, ra_count_min);
@@ -125,16 +193,15 @@ node_t	*insertion(node_t *head_a)
 			//head_b = rotate_b(head_b);
 		//! extra logic to sort B or at least decide if we want to swap or rotate)
 		//! rotate b
-			/* if (head_b->value > second->value)
-				rotate */
-		head_a = delete_at_head(head_a);
+			if (head_b->value > second->value)
+				rotate
 		//lsize = lst_size(head_a);
-		/* if (lsize == 5)
-			head_a = five_sorter(head_a); */
+		if (lsize == 5)
+			head_a = five_sorter(head_a);*/
 		if (head_a == NULL)
 			break;
 	}
-	head_b = push_to_b(head_b, head_a);
+	//head_b = push_to_b(head_b, head_a);
 	/* to get all numbers back in stack a */
 	while (head_b != NULL)
 	{
@@ -195,6 +262,24 @@ int rotate_counter(node_t *head, int min_max) //! until chunk value found
 	while (temp_head->value != min_max)
 	{
 		temp_head = temp_head->next;
+		counter++;
+	}
+	return (counter);
+}
+
+int	reverse_rotate_counter(node_t *head, int target)
+{
+	node_t	*tmp;
+	int	counter;
+
+	tmp = head;
+	counter = 0;
+
+	while (tmp->value != target)
+	{
+		/* printf("%d\n", tmp->value);
+		printf("%d\n", target); */
+		tmp = reverse_rotate_a(tmp);
 		counter++;
 	}
 	return (counter);
