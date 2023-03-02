@@ -92,7 +92,7 @@ int	find_smallest_from_top(node_t *head, int ceiling)
 			break;
 	}
 	if (first_min == ceiling)
-		return (printf("No value lower than ceiling\n"));
+		return (false);
 	return (first_min);
 }
 
@@ -100,18 +100,31 @@ int	find_smallest_from_bottom(node_t *head, int ceiling)
 {
 	int min_value;
     node_t *current;
+	int	counter;
+	int	lsize;
+	int index;
 
+	lsize = lst_size(head);
+	counter = 0;
 	min_value = ceiling;
 	current = head;
+	//index = 0;
     while (current != NULL) 
 	{
         if (current->value < min_value) 
 		{
             min_value = current->value;
+			index = counter;
         }
         current = current->next;
+		counter++;
     }
-	//printf("%d\n", min_value);
+	/* in case that there is no min in the 2nd half of the list */
+	printf("lsize: %d\n", lsize);
+	printf("counter: %d\n", counter);
+	printf("index: %d\n", index);
+	if (index < lsize / 2)
+		return (0);
 	return(min_value);
 }
 
@@ -169,18 +182,26 @@ node_t	*insertion(node_t *head_a)
 		printf("Top min: %d\n", top_min);
 		bottom_min = find_smallest_from_bottom(head_a, ceiling);
 		printf("Bottom min: %d\n", bottom_min);
+		//! Case if ceiling not old enough, maybe if min still the old one
 		/* how many rotations to bring min value in the first half of the stack to the top */
 		ra_count_top = rotate_counter(head_a, top_min);
 		printf("ra count top: %d\n", ra_count_top);
 		rra_count_bottom = reverse_rotate_counter(head_a, bottom_min);
-		//printf("rra count bottom: %d\n", rra_count_bottom);
+		printf("rra count bottom: %d\n", rra_count_bottom);
 		/* find shortest path, at the end target value is on top !!! could be restructured */
-		/* if (ra_count_top <= rra_count_bottom)
+		if (ra_count_top <= rra_count_bottom)
 			head_a = rotate_until_head(head_a, ra_count_top);
 		else if (ra_count_top > rra_count_bottom)
-			head_a = reverse_rotate_until_head(head_a, rra_count_bottom); */
-		head_b = push_to_b(head_b, head_a);
-		head_a = delete_at_head(head_a);
+			head_a = reverse_rotate_until_head(head_a, rra_count_bottom);
+		/* in case we did find a reasonably short path */
+		if (ra_count_top < lsize / 2 || rra_count_bottom < lsize / 2)
+		{
+			head_b = push_to_b(head_b, head_a);
+			head_a = delete_at_head(head_a);
+		}
+		/* meaning in case we did not find a value shorter than the ceiling */
+		if (ra_count_top > lsize / 2 && rra_count_bottom > lsize / 2)
+			ceiling += 1;
 		printlist(head_a);
 		printlist(head_b);
 		/* if (head_a == NULL)
@@ -200,7 +221,7 @@ node_t	*insertion(node_t *head_a)
 
 node_t	*rotate_until_head(node_t *head_a, int	ra_count)
 {
-	while (ra_count > 1)
+	while (ra_count > 0)
 	{
 		head_a = rotate_a(head_a);
 		ra_count--;
@@ -249,32 +270,42 @@ int rotate_counter(node_t *head, int min_max)
 
 int	reverse_rotate_counter(node_t *head, int target)
 {
-	node_t	*tmp;
-	node_t	*temp_tail;
+	node_t *temp_head;
 	int	counter;
-
-	tmp = head;
+	int	lsize;
+	int	res;
+	
+	lsize = lst_size(head);
 	counter = 0;
-	temp_tail = 0;
-
+	temp_head = head;
+	while (temp_head != NULL)
+	{
+		if (temp_head->value == target)
+			break;
+		temp_head = temp_head->next;
+		counter++;
+	}
+	res = lsize - counter;
+	return (res);
+}
+/* 
 	while (tmp != NULL)
 	{
-		/* printf("%d\n", tmp->value);
-		printf("%d\n", target); */
+		 printf("%d\n", tmp->value);
+		printf("%d\n", target); 
 		if (tmp->value == target)
-			break;
-		/* temp_tail = return_tail_value(tmp);
+			break; 
+		 temp_tail = return_tail_value(tmp);
 		tmp = insert_at_head(tmp, temp_tail->value);
-		tmp = delete_at_tail(tmp); */
+		tmp = delete_at_tail(tmp); 
 		reverse_rotate_a_without_command(tmp);
 		counter++;
 	}
-	return (counter);
-}
+	return (counter); */
 
 node_t	*reverse_rotate_until_head(node_t *head, int rra_counter)
 {
-	while (rra_counter > 1) //!
+	while (rra_counter > 0)
 	{
 		printf("%d", head->value);
 		head = reverse_rotate_a(head);
