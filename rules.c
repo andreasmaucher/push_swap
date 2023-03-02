@@ -88,6 +88,16 @@ node_t *reverse_rotate_a(node_t *head)
 	return (head);
 }
 
+node_t *reverse_rotate_a_without_command(node_t *head)
+{
+	node_t *temp_tail;
+	
+	temp_tail = return_tail_value(head);
+	head = insert_at_head(head, temp_tail->value);
+	head = delete_at_tail(head);
+	return (head);
+}
+
 node_t *reverse_rotate_b(node_t *head)
 {
 	node_t *temp_tail;

@@ -73,59 +73,78 @@ int	find_smallest_from_top(node_t *head, int ceiling)
 	int	counter;
 	int	lsize;
 
+	first_min = ceiling; // in case we don't find a value lower we can use this to notify
 	counter = 0;
 	tmp = head;
 	lsize = lst_size(head);
 	while (tmp != NULL)
 	{
 		if (tmp->value < ceiling)
+		{
 			first_min = tmp->value;
+			/* we stop as soon as we find one value that is lower than the ceiling */
+			break;
+		}
 		tmp = tmp->next;
 		counter++;
 		/* we do not want to find the lowest value in all of the stack but only in the first half */
-		if (counter > lsize/2)
+		if (counter >= lsize/2)
 			break;
 	}
+	if (first_min == ceiling)
+		return (printf("No value lower than ceiling\n"));
 	return (first_min);
 }
 
 int	find_smallest_from_bottom(node_t *head, int ceiling)
 {
-	node_t	*tmp;
+	int min_value;
+    node_t *current;
+
+	min_value = ceiling;
+	current = head;
+    while (current != NULL) 
+	{
+        if (current->value < min_value) 
+		{
+            min_value = current->value;
+        }
+        current = current->next;
+    }
+	//printf("%d\n", min_value);
+	return(min_value);
+}
+
+	/* node_t	*tmp;
 	node_t	*last_node;
 	int	last_min;
+	int	lsize;
+	int	counter;
 
+	lsize = lst_size(head);
 	tmp = head;
-	last_node = return_tail_value(tmp);
-	while (last_node->value != tmp->value)
+	while (counter > lsize / 2)
 	{
+		last_node = return_tail_value(tmp);
 		if (last_node->value < ceiling)
 		{
 			last_min = last_node->value;
-			return (last_min);
+			break;
+			//return (last_min);
 		}
 		tmp = delete_at_tail(tmp);
-		last_node = return_tail_value(tmp);
+		counter--;
 	}
-	return (0);
-}
+	printf("\n%d\n", last_min); */
+	//return (last_min); //maybe I could increase the ceiling here if I dont find anything
 
 //! ALGORITHM
 node_t	*insertion(node_t *head_a)
 {
 	node_t	*head_b;
 	node_t	*tmp;
-	/* node_t	*second;
-	node_t	*tail;
-	node_t	*second_last; */
 	int	min;
-	//int	two_min;
 	int	lsize;
-	/* int	chunk_n;
-	int counter;
-	int	ra_count_min;
-	int	ra_count_two_min; */
-	//int	lsize_b;
 	int ratio;
 	int	ceiling;
 	int	ra_count_top;
@@ -133,102 +152,59 @@ node_t	*insertion(node_t *head_a)
 	int top_min;
 	int	bottom_min;
 
+	/* first time creating list b! */
 	head_b = NULL;
 	tmp = head_a;
 	tmp = create_new_node(tmp->value);
-	tmp->next = head_a;
-	//create b
-	while (check_if_sorted(head_a) == false) //! need another condition because I want to have a completely empty!
+	tmp->next = head_b;
+	while (check_if_sorted(head_a) == false && lsize > 4) //! need another condition because I want to have a completely empty!
 	{	
 		lsize = lst_size(head_a);
-		ratio = lsize/7.14;
+		ratio = lsize / 7.14;
 		min = find_smallest_number(head_a);
-		ceiling = min + (ratio*2);
+		//printf("%d\n", min);
+		ceiling = min + (ratio * 2);
+		printf("Ceiling: %d\n", ceiling);
 		top_min = find_smallest_from_top(head_a, ceiling);
-		printf("%d\n", top_min);
+		printf("Top min: %d\n", top_min);
 		bottom_min = find_smallest_from_bottom(head_a, ceiling);
-		printf("%d\n", bottom_min);
+		printf("Bottom min: %d\n", bottom_min);
 		/* how many rotations to bring min value in the first half of the stack to the top */
 		ra_count_top = rotate_counter(head_a, top_min);
+		printf("ra count top: %d\n", ra_count_top);
 		rra_count_bottom = reverse_rotate_counter(head_a, bottom_min);
-		printf("%d", rra_count_bottom);
+		//printf("rra count bottom: %d\n", rra_count_bottom);
 		/* find shortest path, at the end target value is on top !!! could be restructured */
-		if (ra_count_top < rra_count_bottom)
-			head_a = find_shortest_rotation_path(head_a, top_min, ra_count_top); //! change ra_count logic MISTAKE use reverse_rotate function just without counter and return head
+		/* if (ra_count_top <= rra_count_bottom)
+			head_a = rotate_until_head(head_a, ra_count_top);
 		else if (ra_count_top > rra_count_bottom)
-			head_a = find_shortest_rotation_path(head_a, bottom_min, rra_count_bottom);
+			head_a = reverse_rotate_until_head(head_a, rra_count_bottom); */
 		head_b = push_to_b(head_b, head_a);
 		head_a = delete_at_head(head_a);
-		//!!!! chunk logic still mising!
-		/* chunk_n = 5; //! implement separate function to adjust chunks based on n=100 4 chunks, for n=500 11 chunks etc.
-		counter = lsize/chunk_n; //amount of digits in each chunk
-		min = find_smallest_number(head_a);
-		two_min = find_second_smallest_number(head_a, min); */
-		/* optimization: find shortest path for rotate vs. reverse_rotate*/
-		/* ra_count_min = rotate_counter(head_a, min);
-		ra_count_two_min = rotate_counter(head_a, two_min);
-		if (ra_count_min < ra_count_two_min)
-			head_a = find_shortest_rotation_path(head_a, min, ra_count_min);
-		else if (ra_count_min > ra_count_two_min)
-			head_a = find_shortest_rotation_path(head_a, two_min, ra_count_two_min);
-		head_b = push_to_b(head_b, head_a);
-		lsize_b = lst_size(head_b);
-		if (lsize_b > 1)
-		{
-			second = head_b->next;
-			tail = return_tail_value(head_b);
-			second_last = return_second_last_value(head_b);
-			if (head_b->value > second->value && head_b->value > tail->value)
-				head_b = rotate_b(head_b);
-			if (head_b->value > second->value && head_b->value < tail->value && head_b->value > second_last->value)
-			{
-				head_b = reverse_rotate_b(head_b);
-				head_b = swap_b(head_b);
-				head_b = rotate_b(head_b);
-				head_b = rotate_b(head_b);
-			}
-			if (head_b->value > second->value && head_b->value < tail->value)
-				head_b = swap_b(head_b);
-		}
-			//head_b = rotate_b(head_b);
-		//! extra logic to sort B or at least decide if we want to swap or rotate)
-		//! rotate b
-			if (head_b->value > second->value)
-				rotate
-		//lsize = lst_size(head_a);
-		if (lsize == 5)
-			head_a = five_sorter(head_a);*/
-		if (head_a == NULL)
-			break;
+		printlist(head_a);
+		printlist(head_b);
+		/* if (head_a == NULL)
+			break; */
 	}
-	//head_b = push_to_b(head_b, head_a);
 	/* to get all numbers back in stack a */
 	while (head_b != NULL)
 	{
 		head_a = push_to_a(head_a, head_b);
 		head_b = delete_at_head(head_b);
 	}
-	printlist(head_a);
-	printlist(head_b);
+	/* printlist(head_a);
+	printlist(head_b); */
 	free(tmp);
 	return (head_a);
 }
 
-node_t	*find_shortest_rotation_path(node_t *head_a, int	min, int	ra_count)
+node_t	*rotate_until_head(node_t *head_a, int	ra_count)
 {
-	int	lsize;
-
-	lsize = lst_size(head_a);
-		if (ra_count <= lsize/2)
-		{
-			while (head_a->value != min)
-				head_a = rotate_a(head_a);
-		}
-		if (ra_count > lsize/2)
-		{
-			while (head_a->value != min)
-				head_a = reverse_rotate_a(head_a);
-		}
+	while (ra_count > 1)
+	{
+		head_a = rotate_a(head_a);
+		ra_count--;
+	}
 	return (head_a);
 }
 
@@ -252,37 +228,59 @@ bool	check_if_sorted(node_t *head)
 }
 
 /* count rotations */
-int rotate_counter(node_t *head, int min_max) //! until chunk value found
+int rotate_counter(node_t *head, int min_max)
 {
 	node_t *temp_head;
 	int	counter;
 	
 	counter = 0;
 	temp_head = head;
-	while (temp_head->value != min_max)
+	while (temp_head != NULL)
 	{
+		if (temp_head->value == min_max)
+			break;
 		temp_head = temp_head->next;
 		counter++;
 	}
+	//printlist(head);
+	//printf("%d\n", counter);
 	return (counter);
 }
 
 int	reverse_rotate_counter(node_t *head, int target)
 {
 	node_t	*tmp;
+	node_t	*temp_tail;
 	int	counter;
 
 	tmp = head;
 	counter = 0;
+	temp_tail = 0;
 
-	while (tmp->value != target)
+	while (tmp != NULL)
 	{
 		/* printf("%d\n", tmp->value);
 		printf("%d\n", target); */
-		tmp = reverse_rotate_a(tmp);
+		if (tmp->value == target)
+			break;
+		/* temp_tail = return_tail_value(tmp);
+		tmp = insert_at_head(tmp, temp_tail->value);
+		tmp = delete_at_tail(tmp); */
+		reverse_rotate_a_without_command(tmp);
 		counter++;
 	}
 	return (counter);
+}
+
+node_t	*reverse_rotate_until_head(node_t *head, int rra_counter)
+{
+	while (rra_counter > 1) //!
+	{
+		printf("%d", head->value);
+		head = reverse_rotate_a(head);
+		rra_counter--;
+	}
+	return (head);
 }
 
 /* to free up all memory in the end; it is not possible to go from tail to head*/

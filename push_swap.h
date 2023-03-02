@@ -35,7 +35,8 @@ void	freememory(node_t *head);
 int	ft_atoi(const char *nptr);
 int rotate_counter(node_t *head, int min_max);
 int	reverse_rotate_counter(node_t *head, int target);
-node_t	*find_shortest_rotation_path(node_t *head_a, int	min, int	ra_count);
+node_t	*rotate_until_head(node_t *head_a, int	ra_count);
+node_t	*reverse_rotate_until_head(node_t *head, int rra_counter);
 int	find_smallest_from_top(node_t *head, int ceiling);
 int	find_smallest_from_bottom(node_t *head, int ceiling);
 
@@ -53,6 +54,7 @@ node_t *delete_second_node(node_t *head);
 node_t	*create_new_list(node_t *head, int i, char **av);
 node_t *return_next_chunk_value(node_t *head);
 node_t *return_second_last_value(node_t *head);
+int	find_smallest_from_bottom(node_t *head, int ceiling);
 
 /*rules*/
 node_t *swap_a(node_t *head);
@@ -60,6 +62,7 @@ node_t *swap_b(node_t *head);
 node_t *rotate_a(node_t *head);
 node_t *rotate_b(node_t *head);
 node_t *reverse_rotate_a(node_t *head);
+node_t *reverse_rotate_a_without_command(node_t *head);
 node_t *reverse_rotate_b(node_t *head);
 node_t *swap(node_t *head);
 node_t *push_to_b(node_t *head_b, node_t *head_a);
