@@ -79,7 +79,7 @@ int	find_smallest_from_top(node_t *head, int ceiling)
 	lsize = lst_size(head);
 	while (tmp != NULL)
 	{
-		if (tmp->value < ceiling)
+		if (tmp->value <= ceiling)
 		{
 			first_min = tmp->value;
 			/* we stop as soon as we find one value that is lower than the ceiling */
@@ -91,15 +91,31 @@ int	find_smallest_from_top(node_t *head, int ceiling)
 		if (counter >= lsize/2)
 			break;
 	}
-	if (first_min == ceiling)
-		return (false);
+	/* if (first_min == ceiling)
+		return (false); */
 	return (first_min);
+}
+
+int	return_middle_value(node_t *head, int lsize)
+{
+	node_t	*tmp;
+	int	counter;
+
+	tmp = head;
+	counter = 0;
+	while (counter < lsize / 2)
+	{
+		tmp = tmp->next;
+		counter++;
+	}
+	return (tmp->value);
 }
 
 int	find_smallest_from_bottom(node_t *head, int ceiling)
 {
 	int min_value;
     node_t *current;
+	int	middle;
 	int	counter;
 	int	lsize;
 	int index;
@@ -108,24 +124,26 @@ int	find_smallest_from_bottom(node_t *head, int ceiling)
 	counter = 0;
 	min_value = ceiling;
 	current = head;
-	//index = 0;
     while (current != NULL) 
 	{
-        if (current->value < min_value) 
+        if (current->value <= min_value) 
 		{
             min_value = current->value;
 			index = counter;
+			printf("success");
         }
         current = current->next;
 		counter++;
+		if (counter > lsize / 2) //! maybe leave out see if it causes problems
+			break;
     }
 	/* in case that there is no min in the 2nd half of the list */
 	printf("lsize: %d\n", lsize);
 	printf("counter: %d\n", counter);
 	printf("index: %d\n", index);
 	if (index < lsize / 2)
-		return (0);
-	return(min_value);
+		return (printf("Error\n"));
+	else return(min_value);
 }
 
 	/* node_t	*tmp;
@@ -164,13 +182,15 @@ node_t	*insertion(node_t *head_a)
 	int	rra_count_bottom;
 	int top_min;
 	int	bottom_min;
+	int test1;
+	int test2;
 
 	/* first time creating list b! */
 	head_b = NULL;
 	tmp = head_a;
 	tmp = create_new_node(tmp->value);
 	tmp->next = head_b;
-	while (check_if_sorted(head_a) == false && lsize > 4) //! need another condition because I want to have a completely empty!
+	while (check_if_sorted(head_a) == false && lsize < 4 || lsize > 3) //! need another condition because I want to have a completely empty!
 	{	
 		lsize = lst_size(head_a);
 		ratio = lsize / 7.14;
@@ -189,23 +209,31 @@ node_t	*insertion(node_t *head_a)
 		rra_count_bottom = reverse_rotate_counter(head_a, bottom_min);
 		printf("rra count bottom: %d\n", rra_count_bottom);
 		/* find shortest path, at the end target value is on top !!! could be restructured */
-		if (ra_count_top <= rra_count_bottom)
-			head_a = rotate_until_head(head_a, ra_count_top);
-		else if (ra_count_top > rra_count_bottom)
-			head_a = reverse_rotate_until_head(head_a, rra_count_bottom);
+		//if (ra_count_top <= (lsize / 2) || rra_count_bottom <= (lsize / 2))
+			if (ra_count_top <= rra_count_bottom && ra_count_top <= (lsize / 2))
+				head_a = rotate_until_head(head_a, ra_count_top);
+			else if (ra_count_top > rra_count_bottom && rra_count_bottom <= (lsize / 2))
+				head_a = reverse_rotate_until_head(head_a, rra_count_bottom);
+			head_b = push_to_b(head_b, head_a);
+			head_a = delete_at_head(head_a);
+			if (head_b->value < ceiling - ratio)
+				head_b = rotate_b(head_b);                                                                                                                                                                                                                                                                                                                                                                                             
 		/* in case we did find a reasonably short path */
-		if (ra_count_top < lsize / 2 || rra_count_bottom < lsize / 2)
+		/* if (ra_count_top <= (lsize / 2) || rra_count_bottom <= (lsize / 2)) //! ERROR causes infinite loop
 		{
 			head_b = push_to_b(head_b, head_a);
 			head_a = delete_at_head(head_a);
-		}
+		} */
 		/* meaning in case we did not find a value shorter than the ceiling */
 		if (ra_count_top > lsize / 2 && rra_count_bottom > lsize / 2)
-			ceiling += 1;
+			ceiling += ratio * 2;
 		printlist(head_a);
 		printlist(head_b);
 		/* if (head_a == NULL)
 			break; */
+		lsize = lst_size(head_a);
+		if (lsize == 3)
+			head_a = three_sorter(head_a);
 	}
 	/* to get all numbers back in stack a */
 	while (head_b != NULL)
@@ -307,7 +335,6 @@ node_t	*reverse_rotate_until_head(node_t *head, int rra_counter)
 {
 	while (rra_counter > 0)
 	{
-		printf("%d", head->value);
 		head = reverse_rotate_a(head);
 		rra_counter--;
 	}
