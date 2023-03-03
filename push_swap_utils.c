@@ -169,6 +169,27 @@ int	find_smallest_from_bottom(node_t *head, int ceiling)
 	printf("\n%d\n", last_min); */
 	//return (last_min); //maybe I could increase the ceiling here if I dont find anything
 
+//! from Luca
+int	calculate_ratio(int length)
+{
+	if (length < 10)
+	{
+		return (1);
+	}
+	else if (length < 100)
+	{
+		return ((length - 10) * 0.04 + 1);
+	}
+	else if (length < 500)
+	{
+		return ((length - 100) * 0.02 + 14);
+	}
+	else
+	{
+		return ((length - 500) * 0.006 + 30);
+	}
+}
+
 //! ALGORITHM
 node_t	*insertion(node_t *head_a)
 {
@@ -190,13 +211,14 @@ node_t	*insertion(node_t *head_a)
 	tmp = head_a;
 	tmp = create_new_node(tmp->value);
 	tmp->next = head_b;
+	ceiling = min;
 	while (check_if_sorted(head_a) == false && lsize < 4 || lsize > 3) //! need another condition because I want to have a completely empty!
 	{	
 		lsize = lst_size(head_a);
-		ratio = lsize / 7.14;
+		ratio = calculate_ratio(lsize);
 		min = find_smallest_number(head_a);
 		//printf("%d\n", min);
-		ceiling = min + (ratio * 2);
+		ceiling += (ratio * 2);
 		printf("Ceiling: %d\n", ceiling);
 		top_min = find_smallest_from_top(head_a, ceiling);
 		printf("Top min: %d\n", top_min);

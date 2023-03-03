@@ -56,6 +56,7 @@ node_t *return_next_chunk_value(node_t *head);
 node_t *return_second_last_value(node_t *head);
 int	find_smallest_from_bottom(node_t *head, int ceiling);
 int	return_middle_value(node_t *head, int lsize);
+int	ratio(int length);
 
 /*rules*/
 node_t *swap_a(node_t *head);
