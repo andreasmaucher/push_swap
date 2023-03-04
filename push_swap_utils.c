@@ -193,6 +193,10 @@ int	calculate_ratio(int length)
 //! ALGORITHM
 node_t	*insertion(node_t *head_a)
 {
+
+
+/* node_t	*insertion(node_t *head_a)
+{
 	node_t	*head_b;
 	node_t	*tmp;
 	int	min;
@@ -267,7 +271,7 @@ node_t	*insertion(node_t *head_a)
 	printlist(head_b); */
 	free(tmp);
 	return (head_a);
-}
+} */
 
 node_t	*rotate_until_head(node_t *head_a, int	ra_count)
 {
