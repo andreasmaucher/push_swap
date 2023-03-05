@@ -139,9 +139,6 @@ int	find_smallest_from_bottom(node_t *head, int ceiling)
     }
 	/* in case that there is no min in the 2nd half of the list */
 	printf("lsize: %d\n", lsize);
-	printf("counter: %d\n", counter);
-	printf("index: %d\n", index);
-	if (index < lsize / 2)
 		return (printf("Error\n"));
 	else return(min_value);
 }
@@ -190,10 +187,71 @@ int	calculate_ratio(int length)
 	}
 }
 
+//! muss ich umschreiben!
+int	third_max_value(node_t *stack)
+{
+
+	int	first;
+	int	second;
+	int	third;
+
+	first = INT_MIN;
+	second = INT_MIN;
+	third = INT_MIN;
+	while (stack)
+	{
+		if (stack->value > first)
+		{
+			third = second;
+			second = first;
+			first = stack->value;
+		}
+		else if (stack->value > second)
+		{
+			third = second;
+			second = stack->value;
+		}
+		else if (stack->value > third)
+			third = stack->value;
+		stack = stack->next;
+	}
+	return (third);
+}
+
+int	find_shortest_path(node_t *head, int ceiling)
+{
+	int	middle;
+	int	first;
+	int	middle;
+
+	first = find_smallest_from_top(head, ceiling);
+	
+}
+
 //! ALGORITHM
 node_t	*insertion(node_t *head_a)
 {
+	int	ceiling;
+	int	ratio;
+	int	lsize;
+	int	instructions;
 
+	lsize = lst_size(head_a);
+	ratio = calculate_ratio(lsize);
+	ceiling = find_smallest_number(head_a);
+	while (lst_size(head_a) > 3)
+	{
+		ceiling += (ratio * 2);
+		if (ceiling > third_max_value(head_a))
+			ceiling = third_max_value(head_a);
+		instructions = find_shortest_path(head_a, ceiling);
+		while (instructions.index >= 0 && lst_size(head_a) > 3)
+		{
+			send_to_b(a, b, instructions, ceiling - ratio);
+			instructions = get_optimal_move(*a, ceiling);
+		}
+	}
+}
 
 /* node_t	*insertion(node_t *head_a)
 {
@@ -210,7 +268,7 @@ node_t	*insertion(node_t *head_a)
 	int test1;
 	int test2;
 
-	/* first time creating list b! */
+	// first time creating list b!
 	head_b = NULL;
 	tmp = head_a;
 	tmp = create_new_node(tmp->value);
@@ -221,7 +279,7 @@ node_t	*insertion(node_t *head_a)
 		lsize = lst_size(head_a);
 		ratio = calculate_ratio(lsize);
 		min = find_smallest_number(head_a);
-		//printf("%d\n", min);
+		// printf("%d\n", min);
 		ceiling += (ratio * 2);
 		printf("Ceiling: %d\n", ceiling);
 		top_min = find_smallest_from_top(head_a, ceiling);
@@ -229,12 +287,12 @@ node_t	*insertion(node_t *head_a)
 		bottom_min = find_smallest_from_bottom(head_a, ceiling);
 		printf("Bottom min: %d\n", bottom_min);
 		//! Case if ceiling not old enough, maybe if min still the old one
-		/* how many rotations to bring min value in the first half of the stack to the top */
+		// how many rotations to bring min value in the first half of the stack to the top
 		ra_count_top = rotate_counter(head_a, top_min);
 		printf("ra count top: %d\n", ra_count_top);
 		rra_count_bottom = reverse_rotate_counter(head_a, bottom_min);
 		printf("rra count bottom: %d\n", rra_count_bottom);
-		/* find shortest path, at the end target value is on top !!! could be restructured */
+		// find shortest path, at the end target value is on top !!! could be restructured
 		//if (ra_count_top <= (lsize / 2) || rra_count_bottom <= (lsize / 2))
 			if (ra_count_top <= rra_count_bottom && ra_count_top <= (lsize / 2))
 				head_a = rotate_until_head(head_a, ra_count_top);
@@ -244,31 +302,22 @@ node_t	*insertion(node_t *head_a)
 			head_a = delete_at_head(head_a);
 			if (head_b->value < ceiling - ratio)
 				head_b = rotate_b(head_b);                                                                                                                                                                                                                                                                                                                                                                                             
-		/* in case we did find a reasonably short path */
-		/* if (ra_count_top <= (lsize / 2) || rra_count_bottom <= (lsize / 2)) //! ERROR causes infinite loop
-		{
-			head_b = push_to_b(head_b, head_a);
-			head_a = delete_at_head(head_a);
-		} */
-		/* meaning in case we did not find a value shorter than the ceiling */
+		// in case we did find a reasonably short path
+		// meaning in case we did not find a value shorter than the ceiling
 		if (ra_count_top > lsize / 2 && rra_count_bottom > lsize / 2)
 			ceiling += ratio * 2;
 		printlist(head_a);
 		printlist(head_b);
-		/* if (head_a == NULL)
-			break; */
 		lsize = lst_size(head_a);
 		if (lsize == 3)
 			head_a = three_sorter(head_a);
 	}
-	/* to get all numbers back in stack a */
+	//to get all numbers back in stack a
 	while (head_b != NULL)
 	{
 		head_a = push_to_a(head_a, head_b);
 		head_b = delete_at_head(head_b);
 	}
-	/* printlist(head_a);
-	printlist(head_b); */
 	free(tmp);
 	return (head_a);
 } */

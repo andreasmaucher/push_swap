@@ -19,15 +19,32 @@
 #include <stdbool.h>
 #include <limits.h>
 
+typedef enum s_bool
+{
+	false,
+	true
+}	t_bool;
+
+typedef struct s_sort_params {
+	int		value;
+	int		index;
+	t_bool	rotate;
+}	t_sort_params;
+
 struct	node
 {
 	int	value;
+	int	index; //!
 	struct node *next; //a node is a structure (data & link parts) this must be a pointer to a struct
 };
 typedef struct node node_t;
 
 /*main*/
 int	main(int ac, char **av);
+void	send_to_b(node_t **a, node_t **b, t_sort_params instruct, int limit);
+t_sort_params	get_first_match(node_t *stack, int ceiling);
+t_sort_params	get_last_match(node_t *stack, int ceiling);
+t_sort_params	find_shortest_path(node_t *stack, int ceiling);
 
 /*utils*/
 bool	check_if_sorted(node_t *head);
