@@ -66,34 +66,28 @@ int	find_second_smallest_number(node_t *head, int min)
 	return (second_min);
 }
 
-int	find_smallest_from_top(node_t *head, int ceiling)
+t_sort_params	find_smallest_from_top(node_t *head, int ceiling)
 {
-	node_t	*tmp;
-	int	first_min;
-	int	counter;
+	t_sort_params	first;
+	int	middle;
 	int	lsize;
+	node_t	*tmp_head;
 
-	first_min = ceiling; // in case we don't find a value lower we can use this to notify
-	counter = 0;
-	tmp = head;
+	tmp_head = head;
 	lsize = lst_size(head);
-	while (tmp != NULL)
+	middle = return_middle_value(head, lsize);
+	first.index = -1;
+	while(tmp_head->value != middle || tmp_head->value == middle)
 	{
-		if (tmp->value <= ceiling)
+		if (tmp_head->value < ceiling)
 		{
-			first_min = tmp->value;
-			/* we stop as soon as we find one value that is lower than the ceiling */
-			break;
+			first.index = 1;
+			first.value = tmp_head->value;
+			return (first); // do I need to break?
 		}
-		tmp = tmp->next;
-		counter++;
-		/* we do not want to find the lowest value in all of the stack but only in the first half */
-		if (counter >= lsize/2)
-			break;
+		tmp_head = tmp_head->next;
 	}
-	/* if (first_min == ceiling)
-		return (false); */
-	return (first_min);
+	return (first);
 }
 
 int	return_middle_value(node_t *head, int lsize)
@@ -103,7 +97,7 @@ int	return_middle_value(node_t *head, int lsize)
 
 	tmp = head;
 	counter = 0;
-	while (counter < lsize / 2)
+	while (counter < lsize / 2) //! maybe <=
 	{
 		tmp = tmp->next;
 		counter++;
@@ -111,36 +105,29 @@ int	return_middle_value(node_t *head, int lsize)
 	return (tmp->value);
 }
 
-int	find_smallest_from_bottom(node_t *head, int ceiling)
+t_sort_params	find_smallest_from_bottom(node_t *head, int ceiling)
 {
-	int min_value;
-    node_t *current;
+	t_sort_params	last;
 	int	middle;
-	int	counter;
 	int	lsize;
-	int index;
+	node_t	*tmp_head;
 
+	tmp_head = head;
 	lsize = lst_size(head);
-	counter = 0;
-	min_value = ceiling;
-	current = head;
-    while (current != NULL) 
+	middle = return_middle_value(head, lsize);
+	last.index = -1;
+	while (tmp_head->value != middle)
+		tmp_head = tmp_head->next;
+	while (tmp_head) //!=NULL
 	{
-        if (current->value <= min_value) 
+		if (tmp_head->value < ceiling)
 		{
-            min_value = current->value;
-			index = counter;
-			printf("success");
-        }
-        current = current->next;
-		counter++;
-		if (counter > lsize / 2) //! maybe leave out see if it causes problems
-			break;
-    }
-	/* in case that there is no min in the 2nd half of the list */
-	printf("lsize: %d\n", lsize);
-		return (printf("Error\n"));
-	else return(min_value);
+			last.index = 1;
+			last.value = tmp_head->value;
+		}
+		tmp_head = tmp_head->next;
+	}
+	return(last);
 }
 
 	/* node_t	*tmp;
@@ -218,14 +205,42 @@ int	third_max_value(node_t *stack)
 	return (third);
 }
 
-int	find_shortest_path(node_t *head, int ceiling)
+/* optimal move */
+node_t	*find_shortest_path(node_t *head, int ceiling)
 {
 	int	middle;
-	int	first;
-	int	middle;
+	t_sort_params	first;
+	t_sort_params	last;
+	int	ra_count_top;
+	int	rra_count_bottom;
+	int	lsize;
 
+	lsize = lst_size(head);
 	first = find_smallest_from_top(head, ceiling);
-	
+	printf("first: %d\n", first.value);
+	last = find_smallest_from_bottom(head, ceiling);
+	printf("last: %d\n", last.value);
+	if (first.index != -1 || last.index != -1)
+	{
+		middle = return_middle_value(head, lsize);
+		printf("middle: %d\n", middle);
+		ra_count_top = rotate_counter(head, first);
+		printf("ra_count_top: %d\n", ra_count_top);
+		rra_count_bottom = reverse_rotate_counter(head, last);
+		printf("rra_count_bottom: %d\n", rra_count_bottom);
+		//! do I need <= or is < sufficient
+		if (ra_count_top <= rra_count_bottom)
+		{
+			while (head->value != first.value)
+				head = rotate_a(head);
+		}
+		else if (ra_count_top > rra_count_bottom)
+		{
+			while (head->value != last.value)
+				head = reverse_rotate_a(head);
+		}
+	}
+	return(head);
 }
 
 //! ALGORITHM
@@ -235,6 +250,16 @@ node_t	*insertion(node_t *head_a)
 	int	ratio;
 	int	lsize;
 	int	instructions;
+	node_t	*tmp;
+	node_t	*head_b;
+	t_sort_params	first;
+	t_sort_params	last;
+
+	/* creating b */
+	head_b = NULL;
+	tmp = head_a;
+	tmp = create_new_node(tmp->value);
+	tmp->next = head_b;
 
 	lsize = lst_size(head_a);
 	ratio = calculate_ratio(lsize);
@@ -242,15 +267,33 @@ node_t	*insertion(node_t *head_a)
 	while (lst_size(head_a) > 3)
 	{
 		ceiling += (ratio * 2);
+		printf("ceiling: %d\n", ceiling);
+		//! what is this case for??
 		if (ceiling > third_max_value(head_a))
 			ceiling = third_max_value(head_a);
-		instructions = find_shortest_path(head_a, ceiling);
-		while (instructions.index >= 0 && lst_size(head_a) > 3)
+		/* if (ceiling < find_smallest_number(head_a))
+		ceiling = find_smallest_number(head_a) + 1; */
+		first = find_smallest_from_top(head_a, ceiling);
+		printf("first index: %d\n", first.index);
+		last = find_smallest_from_bottom(head_a, ceiling);
+		printf("last index: %d\n", last.index);
+		while (lst_size(head_a) > 3 && first.index != -1 && last.index != -1)
 		{
-			send_to_b(a, b, instructions, ceiling - ratio);
-			instructions = get_optimal_move(*a, ceiling);
+			first = find_smallest_from_top(head_a, ceiling);
+			printf("first index: %d\n", first.index);
+			last = find_smallest_from_bottom(head_a, ceiling);
+			printf("last index: %d\n", last.index);
+			head_a = find_shortest_path(head_a, ceiling);
+			head_b = push_to_b(head_b, head_a);
+			head_a = delete_at_head(head_a);
+			if (head_b->value < (ceiling-ratio) && lst_size(head_b) > 1)
+				head_b = rotate_b(head_b);
+			printlist(head_a);
+			printlist(head_b);
 		}
 	}
+	free(tmp);
+	return (head_a);
 }
 
 /* node_t	*insertion(node_t *head_a)
@@ -352,7 +395,7 @@ bool	check_if_sorted(node_t *head)
 }
 
 /* count rotations */
-int rotate_counter(node_t *head, int min_max)
+int rotate_counter(node_t *head, t_sort_params min_max)
 {
 	node_t *temp_head;
 	int	counter;
@@ -361,7 +404,7 @@ int rotate_counter(node_t *head, int min_max)
 	temp_head = head;
 	while (temp_head != NULL)
 	{
-		if (temp_head->value == min_max)
+		if (temp_head->value == min_max.value)
 			break;
 		temp_head = temp_head->next;
 		counter++;
@@ -371,7 +414,7 @@ int rotate_counter(node_t *head, int min_max)
 	return (counter);
 }
 
-int	reverse_rotate_counter(node_t *head, int target)
+int	reverse_rotate_counter(node_t *head, t_sort_params target)
 {
 	node_t *temp_head;
 	int	counter;
@@ -383,7 +426,7 @@ int	reverse_rotate_counter(node_t *head, int target)
 	temp_head = head;
 	while (temp_head != NULL)
 	{
-		if (temp_head->value == target)
+		if (temp_head->value == target.value)
 			break;
 		temp_head = temp_head->next;
 		counter++;

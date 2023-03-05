@@ -19,16 +19,16 @@
 #include <stdbool.h>
 #include <limits.h>
 
-typedef enum s_bool
+/* typedef enum s_bool
 {
 	false,
 	true
 }	t_bool;
-
-typedef struct s_sort_params {
+*/
+typedef struct s_sort_params 
+{
 	int		value;
 	int		index;
-	t_bool	rotate;
 }	t_sort_params;
 
 struct	node
@@ -41,21 +41,25 @@ typedef struct node node_t;
 
 /*main*/
 int	main(int ac, char **av);
-void	send_to_b(node_t **a, node_t **b, t_sort_params instruct, int limit);
+/* void	send_to_b(node_t **a, node_t **b, t_sort_params instruct, int limit);
 t_sort_params	get_first_match(node_t *stack, int ceiling);
-t_sort_params	get_last_match(node_t *stack, int ceiling);
-t_sort_params	find_shortest_path(node_t *stack, int ceiling);
+t_sort_params	get_last_match(node_t *stack, int ceiling); */
+node_t	*find_shortest_path(node_t *head, int ceiling);
 
 /*utils*/
 bool	check_if_sorted(node_t *head);
 void	freememory(node_t *head);
 int	ft_atoi(const char *nptr);
-int rotate_counter(node_t *head, int min_max);
-int	reverse_rotate_counter(node_t *head, int target);
+//int rotate_counter(node_t *head, int min_max);
+//int	reverse_rotate_counter(node_t *head, int target);
+int rotate_counter(node_t *head, t_sort_params min_max);
+int	reverse_rotate_counter(node_t *head, t_sort_params target);
 node_t	*rotate_until_head(node_t *head_a, int	ra_count);
 node_t	*reverse_rotate_until_head(node_t *head, int rra_counter);
-int	find_smallest_from_top(node_t *head, int ceiling);
-int	find_smallest_from_bottom(node_t *head, int ceiling);
+//int	find_smallest_from_top(node_t *head, int ceiling);
+//int	find_smallest_from_bottom(node_t *head, int ceiling);
+t_sort_params	find_smallest_from_bottom(node_t *head, int ceiling);
+t_sort_params	find_smallest_from_top(node_t *head, int ceiling);
 
 /*list operators*/
 node_t	*create_new_node(int value);
@@ -71,7 +75,6 @@ node_t *delete_second_node(node_t *head);
 node_t	*create_new_list(node_t *head, int i, char **av);
 node_t *return_next_chunk_value(node_t *head);
 node_t *return_second_last_value(node_t *head);
-int	find_smallest_from_bottom(node_t *head, int ceiling);
 int	return_middle_value(node_t *head, int lsize);
 int	ratio(int length);
 
