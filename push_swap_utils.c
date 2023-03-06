@@ -77,7 +77,7 @@ t_sort_params	find_smallest_from_top(node_t *head, int ceiling)
 	lsize = lst_size(head);
 	middle = return_middle_value(head, lsize);
 	first.index = -1;
-	while(tmp_head->value != middle || tmp_head->value == middle)
+	while(tmp_head->value != middle) //|| tmp_head->value == middle //! this made a huge difference!!!!
 	{
 		if (tmp_head->value < ceiling)
 		{
@@ -115,11 +115,14 @@ t_sort_params	find_smallest_from_bottom(node_t *head, int ceiling)
 	tmp_head = head;
 	lsize = lst_size(head);
 	middle = return_middle_value(head, lsize);
+	//printf("middle in bottom function: %d\n", middle);
 	last.index = -1;
 	while (tmp_head->value != middle)
 		tmp_head = tmp_head->next;
-	while (tmp_head) //!=NULL
+	//printf("head in bottom function: %d\n", tmp_head->value);
+	while (tmp_head != NULL)
 	{
+	//printf("head in bottom function: %d\n", tmp_head->value);
 		if (tmp_head->value < ceiling)
 		{
 			last.index = 1;
@@ -127,6 +130,7 @@ t_sort_params	find_smallest_from_bottom(node_t *head, int ceiling)
 		}
 		tmp_head = tmp_head->next;
 	}
+	//printf("head in bottom function: %d", tmp_head->value); //! causes segfault
 	return(last);
 }
 
@@ -217,9 +221,9 @@ node_t	*find_shortest_path(node_t *head, int ceiling)
 
 	lsize = lst_size(head);
 	first = find_smallest_from_top(head, ceiling);
-	printf("first: %d\n", first.value);
+	printf("first path: %d\n", first.value);
 	last = find_smallest_from_bottom(head, ceiling);
-	printf("last: %d\n", last.value);
+	printf("last path: %d\n", last.value);
 	if (first.index != -1 || last.index != -1)
 	{
 		middle = return_middle_value(head, lsize);
@@ -268,7 +272,6 @@ node_t	*insertion(node_t *head_a)
 	{
 		ceiling += (ratio * 2);
 		printf("ceiling: %d\n", ceiling);
-		//! what is this case for??
 		if (ceiling > third_max_value(head_a))
 			ceiling = third_max_value(head_a);
 		/* if (ceiling < find_smallest_number(head_a))
@@ -276,20 +279,20 @@ node_t	*insertion(node_t *head_a)
 		first = find_smallest_from_top(head_a, ceiling);
 		printf("first index: %d\n", first.index);
 		last = find_smallest_from_bottom(head_a, ceiling);
-		printf("last index: %d\n", last.index);
-		while (lst_size(head_a) > 3 && first.index != -1 && last.index != -1)
+		printf("\nlast index: %d\n", last.index);
+		while (lst_size(head_a) > 3 && first.index != -1 || lst_size(head_a) > 3 && last.index != -1)
 		{
-			first = find_smallest_from_top(head_a, ceiling);
-			printf("first index: %d\n", first.index);
-			last = find_smallest_from_bottom(head_a, ceiling);
-			printf("last index: %d\n", last.index);
 			head_a = find_shortest_path(head_a, ceiling);
 			head_b = push_to_b(head_b, head_a);
 			head_a = delete_at_head(head_a);
-			if (head_b->value < (ceiling-ratio) && lst_size(head_b) > 1)
+			if (head_b->value < (ceiling - ratio) && lst_size(head_b) > 1)
 				head_b = rotate_b(head_b);
 			printlist(head_a);
 			printlist(head_b);
+			first = find_smallest_from_top(head_a, ceiling);
+			printf("first index2: %d\n", first.index);
+			last = find_smallest_from_bottom(head_a, ceiling);
+			printf("last index2: %d\n", last.index);
 		}
 	}
 	free(tmp);
