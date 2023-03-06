@@ -60,6 +60,7 @@ node_t	*reverse_rotate_until_head(node_t *head, int rra_counter);
 //int	find_smallest_from_bottom(node_t *head, int ceiling);
 t_sort_params	find_smallest_from_bottom(node_t *head, int ceiling);
 t_sort_params	find_smallest_from_top(node_t *head, int ceiling);
+node_t	*move_to_a(node_t *head_a, node_t *head_b);
 
 /*list operators*/
 node_t	*create_new_node(int value);
@@ -99,6 +100,7 @@ node_t	*five_sorter_add_two(node_t *head);
 int	find_smallest_number(node_t *head);
 int	find_second_smallest_number(node_t *head_a, int min);
 int	find_largest_number(node_t *head);
+t_sort_params	find_largest_value(node_t *head);
 node_t	*insertion(node_t *head_a);
 
 #endif
