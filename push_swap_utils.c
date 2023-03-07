@@ -17,7 +17,6 @@ int	find_largest_number(node_t *head)
 	int	max;
 	node_t	*tmp;
 	
-	/* does it work for exactly INT_MIN/MAX???*/
 	max = INT_MIN;
 
 	tmp = head;
@@ -50,12 +49,9 @@ t_sort_params	find_largest_value(node_t *head)
 int	find_smallest_number(node_t *head)
 {
 	int min;
-	//int	max;
 	node_t	*tmp;
 	
-	/* does it work for exactly INT_MIN/MAX???*/
 	min = INT_MAX;
-	//max = INT_MIN;
 
 	tmp = head;
 	while (tmp != NULL)
@@ -94,13 +90,13 @@ t_sort_params	find_smallest_from_top(node_t *head, int ceiling)
 	lsize = lst_size(head);
 	middle = return_middle_value(head, lsize);
 	first.index = -1;
-	while(tmp_head->value != middle) //|| tmp_head->value == middle //! this made a huge difference!!!!
+	while(tmp_head->value != middle)
 	{
 		if (tmp_head->value < ceiling)
 		{
 			first.index = 1;
 			first.value = tmp_head->value;
-			return (first); // do I need to break?
+			return (first);
 		}
 		tmp_head = tmp_head->next;
 	}
@@ -114,7 +110,7 @@ int	return_middle_value(node_t *head, int lsize)
 
 	tmp = head;
 	counter = 0;
-	while (counter < lsize / 2) //! maybe <=
+	while (counter < lsize / 2)
 	{
 		tmp = tmp->next;
 		counter++;
@@ -132,14 +128,11 @@ t_sort_params	find_smallest_from_bottom(node_t *head, int ceiling)
 	tmp_head = head;
 	lsize = lst_size(head);
 	middle = return_middle_value(head, lsize);
-	//printf("middle in bottom function: %d\n", middle);
 	last.index = -1;
 	while (tmp_head->value != middle)
 		tmp_head = tmp_head->next;
-	//printf("head in bottom function: %d\n", tmp_head->value);
 	while (tmp_head != NULL)
 	{
-	//printf("head in bottom function: %d\n", tmp_head->value);
 		if (tmp_head->value < ceiling)
 		{
 			last.index = 1;
@@ -147,7 +140,6 @@ t_sort_params	find_smallest_from_bottom(node_t *head, int ceiling)
 		}
 		tmp_head = tmp_head->next;
 	}
-	//printf("head in bottom function: %d", tmp_head->value); //! causes segfault
 	return(last);
 }
 

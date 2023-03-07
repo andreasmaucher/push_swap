@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <limits.h>
+#include <aio.h>
 
 /* typedef enum s_bool
 {
@@ -61,6 +62,7 @@ node_t	*reverse_rotate_until_head(node_t *head, int rra_counter);
 t_sort_params	find_smallest_from_bottom(node_t *head, int ceiling);
 t_sort_params	find_smallest_from_top(node_t *head, int ceiling);
 node_t	*move_to_a(node_t *head_a, node_t *head_b);
+char	**ft_split(char const *s, char c);
 
 /*list operators*/
 node_t	*create_new_node(int value);

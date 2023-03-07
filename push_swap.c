@@ -12,14 +12,7 @@
 
 #include "push_swap.h"
 
-//TODO implement other operations, mainly swap first two nodes
-/* then open up stack b
-once all operators are done think about how to start algorithm logic 
-try it out for 3 digits, where I can basically hardcode the solution
-structure my code */
-/* if 3 values check the sorting in the list which one is bigger etc*/
-/* then do a bunch of if conditions*/
-/* if more than x values open up stack B*/
+//int	check_valid_input
 
 int	main(int ac, char **av)
 {
@@ -29,10 +22,12 @@ int	main(int ac, char **av)
 	/* if no parameters specified give control back to the user */
 	if (ac == 1)
 		return (0);
+	if (ac == 2)
+		check_single_string_input(av[2]);
 	//TODO: in case of error display "Error\n"
 	//TODO: each value is only allowed once
-	head_a = NULL; // important, head must always point to NULL
-	i = ac-1; // ac -1 because av index starts at 0
+	head_a = NULL;
+	i = ac-1;
 	head_a = create_new_list(head_a, i, av);
 	printlist(head_a);
 	if (check_if_sorted(head_a) == false)
