@@ -75,7 +75,7 @@ int	lst_size(node_t *head);
 node_t *return_tail_value(node_t *head);
 void	printlist(node_t *head);
 node_t *delete_second_node(node_t *head);
-node_t	*create_new_list(node_t *head, int i, char **av);
+node_t	*create_new_list(node_t *head, char **av);
 node_t *return_next_chunk_value(node_t *head);
 node_t *return_second_last_value(node_t *head);
 int	return_middle_value(node_t *head, int lsize);

@@ -10,7 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = push_swap.c insertion.c list_operators.c push_swap_utils.c rules.c sorter.c \
+SRCS = push_swap.c insertion.c list_operators.c push_swap_utils.c rules.c \
+split.c sorter.c \
 
 OBJS = $(SRCS:.c=.o)
 
