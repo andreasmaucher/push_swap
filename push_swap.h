@@ -20,12 +20,6 @@
 #include <limits.h>
 #include <aio.h>
 
-/* typedef enum s_bool
-{
-	false,
-	true
-}	t_bool;
-*/
 typedef struct s_sort_params 
 {
 	int		value;
@@ -35,7 +29,7 @@ typedef struct s_sort_params
 struct	node
 {
 	int	value;
-	int	index; //!
+	int	index;
 	struct node *next; //a node is a structure (data & link parts) this must be a pointer to a struct
 };
 typedef struct node node_t;
@@ -46,6 +40,7 @@ int	main(int ac, char **av);
 t_sort_params	get_first_match(node_t *stack, int ceiling);
 t_sort_params	get_last_match(node_t *stack, int ceiling); */
 node_t	*find_shortest_path(node_t *head, int ceiling);
+bool	check_for_duplicates(int ac, char **av);
 
 /*utils*/
 bool	check_if_sorted(node_t *head);
@@ -75,7 +70,7 @@ int	lst_size(node_t *head);
 node_t *return_tail_value(node_t *head);
 void	printlist(node_t *head);
 node_t *delete_second_node(node_t *head);
-node_t	*create_new_list(node_t *head, char **av);
+node_t	*create_new_list(node_t *head, int i, char **av);
 node_t *return_next_chunk_value(node_t *head);
 node_t *return_second_last_value(node_t *head);
 int	return_middle_value(node_t *head, int lsize);

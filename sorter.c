@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+//!
 node_t *three_sorter(node_t *head)
 {
 	node_t	*second;
@@ -40,7 +40,7 @@ node_t *three_sorter(node_t *head)
 	}
 	return(head);
 }
-
+//!
 node_t	*five_sorter_add_two(node_t *head)
 {
 	node_t	*second;
@@ -65,7 +65,7 @@ node_t	*five_sorter_add_two(node_t *head)
 		head = rotate_a(head);
 	return (head);
 }
-
+//!
 node_t *five_sorter(node_t *head_a)
 {
 	node_t	*head_b;
@@ -84,7 +84,7 @@ node_t *five_sorter(node_t *head_a)
 		head_b = push_to_b(head_b, head_a);
 		head_a = delete_at_head(head_a);
 	}
-	printlist(head_b);
+	//printlist(head_b);
 	head_a = three_sorter(head_a);
 	counter = 2;
 	while (counter-- > 0)

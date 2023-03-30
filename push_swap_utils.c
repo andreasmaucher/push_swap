@@ -325,6 +325,7 @@ node_t	*rotate_until_head(node_t *head_a, int	ra_count)
 	return (head_a);
 }
 
+//!
 /* check whether the next node is always greater than the previous node */
 bool	check_if_sorted(node_t *head)
 {
@@ -395,6 +396,7 @@ node_t	*reverse_rotate_until_head(node_t *head, int rra_counter)
 	return (head);
 }
 
+//!
 /* to free up all memory in the end; it is not possible to go from tail to head*/
 void	freememory(node_t *head)
 {

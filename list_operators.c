@@ -97,7 +97,7 @@ int	lst_size(node_t *head)
 	}
 	return (lsize);
 }
-
+//!
 node_t *return_tail_value(node_t *head)
 {
 	node_t *current_node_pos;
@@ -187,27 +187,20 @@ node_t *delete_second_node(node_t *head)
 	free(current);
 	return (head);
 }
-
-/* to create the new list from scratch*/
-node_t	*create_new_list(node_t *head, char **av)
+//!
+/* to create the new list from scratch; last input number is first added as head*/
+node_t	*create_new_list(node_t *head, int i, char **av)
 {
 	node_t	*tmp;
-	char	**arr;
 	int	input;
-	int	i;
 
-	i = 0;
-	arr = ft_split(av[1], ' ');
-	while (arr[i] != NULL)
-		i++;
-	i -= 1;
-	while (i >= 0)
+	while (i >= 1)
 	{	
-		input = ft_atoi(arr[i]);
+		input = ft_atoi(av[i]);
 		tmp = create_new_node(input);
 		tmp->next = head;
 		new_list_insert_at_head(&head, tmp);
-		i--; //last input number is first added as head
+		i--;
 	}
 	return (head);
 }
