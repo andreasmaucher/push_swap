@@ -13,7 +13,7 @@
 NAME = push_swap.a
 
 SRCS = push_swap.c list_operators.c push_swap_utils.c rules.c \
-split.c sorter.c optimization.c target_values.c \
+split.c sorter.c target_values.c rules2.c algorithm.c list_operators2.c \
 
 OBJS = $(SRCS:.c=.o)
 

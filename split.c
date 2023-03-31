@@ -12,16 +12,6 @@
 
 #include "push_swap.h"
 
-size_t	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
 char	*ft_strdup(const char *s)
 {
 	char	*duplicate;
@@ -91,7 +81,6 @@ static size_t	ft_wordcount(char const *s, char c)
 
 /* for each string delimited by c an array gets filled 
  char *ft_substr(char const *s, unsigned int start, size_t len) */
-
 static void	filling_array(char **arr, size_t len_arr, char const *s, char c)
 {
 	size_t	i;

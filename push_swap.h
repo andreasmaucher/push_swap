@@ -44,8 +44,6 @@ void	freememory(node_t *head);
 int	ft_atoi(const char *nptr);
 int rotate_counter(node_t *head, t_sort_params min_max);
 int	reverse_rotate_counter(node_t *head, t_sort_params target);
-node_t	*rotate_until_head(node_t *head_a, int	ra_count);
-node_t	*reverse_rotate_until_head(node_t *head, int rra_counter);
 t_sort_params	find_smallest_from_bottom(node_t *head, int ceiling);
 t_sort_params	find_smallest_from_top(node_t *head, int ceiling);
 node_t	*move_to_a(node_t *head_a, node_t *head_b);
@@ -54,6 +52,8 @@ char	**ft_split(char const *s, char c);
 node_t *creating_list_b(node_t *head_a);
 int	calculate_ceiling(int ceiling, node_t *head_a);
 node_t	*ra_vs_rra(node_t *head, t_sort_params first, t_sort_params last);
+int	calculate_ratio(int length);
+size_t	ft_strlen(const char *s);
 
 
 /*list operators*/
@@ -68,10 +68,10 @@ node_t *return_tail_value(node_t *head);
 void	printlist(node_t *head);
 node_t *delete_second_node(node_t *head);
 node_t	*create_new_list(node_t *head, int i, char **av);
-node_t *return_next_chunk_value(node_t *head);
-node_t *return_second_last_value(node_t *head);
+//node_t *return_next_chunk_value(node_t *head);
 int	return_middle_value(node_t *head, int lsize);
 int	ratio(int length);
+int	find_third_highest_value(node_t *head);
 
 /*rules*/
 node_t *swap_a(node_t *head);

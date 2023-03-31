@@ -107,3 +107,32 @@ t_sort_params	find_smallest_from_bottom(node_t *head, int ceiling)
 	}
 	return (last);
 }
+
+int	find_third_highest_value(node_t *head)
+{
+	int	first;
+	int	second;
+	int	third;
+
+	first = INT_MIN;
+	second = INT_MIN;
+	third = INT_MIN;
+	while (head != NULL)
+	{
+		if (head->value > first)
+		{
+			third = second;
+			second = first;
+			first = head->value;
+		}
+		else if (head->value > second)
+		{
+			third = second;
+			second = head->value;
+		}
+		else if (head->value > third)
+			third = head->value;
+		head = head->next;
+	}
+	return (third);
+}
