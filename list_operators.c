@@ -20,14 +20,15 @@ node_t	*create_new_node(int value)
 	return newnode;
 }
 
-node_t *new_list_insert_at_head(node_t **head, node_t *node_to_insert) //we use a double pointer because we want to change the value of a pointer
+/* we use a double pointer because we want to change the value of a pointer */
+node_t *new_list_insert_at_head(node_t **head, node_t *node_to_insert)
 {
 	node_to_insert->next = *head;
 	*head = node_to_insert;
 	return (node_to_insert);
 }
 
-node_t	*insert_at_head(node_t *head, int new_value) //we use a double pointer because we want to change the value of a pointer
+node_t	*insert_at_head(node_t *head, int new_value)
 {
 	node_t *new_head;
 

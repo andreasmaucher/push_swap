@@ -34,7 +34,6 @@ node_t	*push_to_a(node_t *head_a, node_t *head_b)
 	return (head_a);
 }
 
-
 /* RULE rra reverse rotate so that the last element becomes the first one */
 node_t	*reverse_rotate_a(node_t *head)
 {
