@@ -11,36 +11,37 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-//!
-node_t *three_sorter(node_t *head)
+
+/* h = head, t = tail node, s = second node */
+node_t	*three_sorter(node_t *h)
 {
-	node_t	*second;
-	node_t	*tail;
-	
-	while (check_if_sorted(head) == false)
+	node_t	*s;
+	node_t	*t;
+
+	while (check_if_sorted(h) == false)
 	{
-		tail = return_tail_value(head);
-		second = head->next;
-		if (head->value < tail->value && head->value > second->value && second->value < tail->value)
-			head = swap_a(head);
-		if (head->value > tail->value && head->value > second->value && second->value > tail->value)
+		t = return_tail_value(h);
+		s = h->next;
+		if (h->value < t->value && h->value > s->value && s->value < t->value)
+			h = swap_a(h);
+		if (h->value > t->value && h->value > s->value && s->value > t->value)
 		{
-			head = swap_a(head);
-			head = reverse_rotate_a(head);
+			h = swap_a(h);
+			h = reverse_rotate_a(h);
 		}
-		if (head->value > tail->value && head->value > second->value && second->value < tail->value)
-			head = rotate_a(head);
-		if (head->value < tail->value && head->value < second->value && second->value > tail->value)
+		if (h->value > t->value && h->value > s->value && s->value < t->value)
+			h = rotate_a(h);
+		if (h->value < t->value && h->value < s->value && s->value > t->value)
 		{
-			head = swap_a(head);
-			head = rotate_a(head);
+			h = swap_a(h);
+			h = rotate_a(h);
 		}
-		if (head->value > tail->value && head->value < second->value && second->value > tail->value)
-			head = reverse_rotate_a(head);
+		if (h->value > t->value && h->value < s->value && s->value > t->value)
+			h = reverse_rotate_a(h);
 	}
-	return(head);
+	return (h);
 }
-//!
+
 node_t	*five_sorter_add_two(node_t *head)
 {
 	node_t	*second;
@@ -49,7 +50,7 @@ node_t	*five_sorter_add_two(node_t *head)
 
 	second = head->next;
 	third = second->next;
-	if (head->value > second->value && head->value < third->value) //if number belongs to 2nd pos
+	if (head->value > second->value && head->value < third->value)
 		head = swap_a(head);
 	tail = return_tail_value(head);
 	third = second->next;
@@ -65,26 +66,25 @@ node_t	*five_sorter_add_two(node_t *head)
 		head = rotate_a(head);
 	return (head);
 }
-//!
-node_t *five_sorter(node_t *head_a)
+
+/* first time creating list b! */
+/* push first two nodes of a to b to be able to apply three_sort logic */
+node_t	*five_sorter(node_t *head_a)
 {
 	node_t	*head_b;
 	node_t	*tmp;
-	int	counter;
+	int		counter;
 
 	counter = 2;
-	/* first time creating list b! */
 	head_b = NULL;
 	tmp = head_a;
 	tmp = create_new_node(tmp->value);
 	tmp->next = head_b;
-	/* push first two nodes of a to b to be able to apply three_sort logic */
 	while (counter-- > 0)
 	{
 		head_b = push_to_b(head_b, head_a);
 		head_a = delete_at_head(head_a);
 	}
-	//printlist(head_b);
 	head_a = three_sorter(head_a);
 	counter = 2;
 	while (counter-- > 0)

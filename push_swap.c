@@ -26,7 +26,7 @@ bool	check_valid_input(int ac, char **av)
 	}
 	return (true);
 }
-//!
+/* 
 bool	check_for_duplicates(int ac, char **av)
 {
 	int	i;
@@ -37,7 +37,7 @@ bool	check_for_duplicates(int ac, char **av)
 
 	i = ac - 1;
 	a = 0;
-	/* fill the array */
+	// fill the array
 	while (i >= 1)
 	{	
 		c = ft_atoi(av[i]);
@@ -61,7 +61,7 @@ bool	check_for_duplicates(int ac, char **av)
 	}
 	return (true);
 }
-
+ */
 int	main(int ac, char **av)
 {
 	node_t	*head_a;

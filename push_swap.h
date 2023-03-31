@@ -35,10 +35,6 @@ struct	node
 typedef struct node node_t;
 
 /*main*/
-int	main(int ac, char **av);
-/* void	send_to_b(node_t **a, node_t **b, t_sort_params instruct, int limit);
-t_sort_params	get_first_match(node_t *stack, int ceiling);
-t_sort_params	get_last_match(node_t *stack, int ceiling); */
 node_t	*find_shortest_path(node_t *head, int ceiling);
 bool	check_for_duplicates(int ac, char **av);
 
@@ -46,18 +42,19 @@ bool	check_for_duplicates(int ac, char **av);
 bool	check_if_sorted(node_t *head);
 void	freememory(node_t *head);
 int	ft_atoi(const char *nptr);
-//int rotate_counter(node_t *head, int min_max);
-//int	reverse_rotate_counter(node_t *head, int target);
 int rotate_counter(node_t *head, t_sort_params min_max);
 int	reverse_rotate_counter(node_t *head, t_sort_params target);
 node_t	*rotate_until_head(node_t *head_a, int	ra_count);
 node_t	*reverse_rotate_until_head(node_t *head, int rra_counter);
-//int	find_smallest_from_top(node_t *head, int ceiling);
-//int	find_smallest_from_bottom(node_t *head, int ceiling);
 t_sort_params	find_smallest_from_bottom(node_t *head, int ceiling);
 t_sort_params	find_smallest_from_top(node_t *head, int ceiling);
 node_t	*move_to_a(node_t *head_a, node_t *head_b);
 char	**ft_split(char const *s, char c);
+//node_t	*algorithm(node_t *head_a, node_t *head_b, int ceiling, int ratio, t_sort_params first, t_sort_params last);
+node_t *creating_list_b(node_t *head_a);
+int	calculate_ceiling(int ceiling, node_t *head_a);
+node_t	*ra_vs_rra(node_t *head, t_sort_params first, t_sort_params last);
+
 
 /*list operators*/
 node_t	*create_new_node(int value);
@@ -82,7 +79,7 @@ node_t *swap_b(node_t *head);
 node_t *rotate_a(node_t *head);
 node_t *rotate_b(node_t *head);
 node_t *reverse_rotate_a(node_t *head);
-node_t *reverse_rotate_a_without_command(node_t *head);
+//node_t *reverse_rotate_a_without_command(node_t *head);
 node_t *reverse_rotate_b(node_t *head);
 node_t *swap(node_t *head);
 node_t *push_to_b(node_t *head_b, node_t *head_a);
@@ -95,8 +92,8 @@ node_t	*five_sorter_add_two(node_t *head);
 
 /*insertion*/
 int	find_smallest_number(node_t *head);
-int	find_second_smallest_number(node_t *head_a, int min);
-int	find_largest_number(node_t *head);
+//int	find_second_smallest_number(node_t *head_a, int min);
+//int	find_largest_number(node_t *head);
 t_sort_params	find_largest_value(node_t *head);
 node_t	*insertion(node_t *head_a);
 

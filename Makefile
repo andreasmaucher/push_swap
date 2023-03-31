@@ -10,26 +10,30 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = push_swap.c insertion.c list_operators.c push_swap_utils.c rules.c \
-split.c sorter.c \
+NAME = push_swap.a
+
+SRCS = push_swap.c list_operators.c push_swap_utils.c rules.c \
+split.c sorter.c optimization.c target_values.c \
 
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -I.
 
-NAME = push_swap
+RM = rm -f
+
+CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-		ar rcs $(NAME) $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
 clean:
-	/bin/rm -f $(OBJS)
+	$(RM) $(OBJS)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
+
+.PHONY:		all clean fclean re
