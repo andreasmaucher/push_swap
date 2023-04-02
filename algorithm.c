@@ -36,19 +36,13 @@ node_t	*ra_vs_rra(node_t *head, t_sort_params first, t_sort_params last)
 /* optimal move */
 node_t	*find_shortest_path(node_t *head, int ceiling)
 {
-	int				middle;
 	t_sort_params	first;
 	t_sort_params	last;
-	int				lsize;
 
-	lsize = lst_size(head);
 	first = find_smallest_from_top(head, ceiling);
 	last = find_smallest_from_bottom(head, ceiling);
 	if (first.index != -1 || last.index != -1)
-	{
-		middle = return_middle_value(head, lsize);
 		head = ra_vs_rra(head, first, last);
-	}
 	return (head);
 }
 
