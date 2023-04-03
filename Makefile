@@ -10,8 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
-
 SRCS = main.c list_operators.c utils.c rules.c move_counter.c \
 ft_split.c sorter.c target_values.c rules2.c algorithm.c list_operators2.c \
 calculations.c \
@@ -24,10 +22,13 @@ RM = rm -f
 
 CFLAGS = -Wall -Wextra -Werror
 
+NAME = push_swap
+MAKE = make
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) -o $(NAME)
 
 clean:
 	$(RM) $(OBJS)
