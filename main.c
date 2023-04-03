@@ -26,42 +26,28 @@ bool	check_valid_input(int ac, char **av)
 	}
 	return (true);
 }
-/* 
+
 bool	check_for_duplicates(int ac, char **av)
 {
-	int	i;
-	int	a;
-	int	b;
-	int *arr;
-	int c;
+	int		i;
+	int		j;
+	char	*c;
 
-	i = ac - 1;
-	a = 0;
-	// fill the array
-	while (i >= 1)
-	{	
-		c = ft_atoi(av[i]);
-		arr[a] = c;
-		a++;
-		i--;
-	}
-	a = 0;
-	b = 1;
-	while (arr[a])
+	i = 0;
+	while (i < ac - 1)//! or <=
 	{
-		c = arr[a];
-		b = a + 1;
-		while (arr[b])
+		c = av[i];
+		j = i + 1;
+		while (av[j])
 		{
-			if (c == arr[b])
-				return (false);
-			b++;
+			if (c == av[i + j])
+				return(false);
+			j++;
 		}
-		a++;
+		i++;
 	}
 	return (true);
 }
- */
 
 /* if no parameters specified give control back to the user */
 
@@ -74,8 +60,8 @@ int	main(int ac, char **av)
 		return (0);
 	if (check_valid_input(ac, av) == false)
 		return(write(1, "Error\n", 6));
-	/* if (check_for_duplicates(ac, av) == false)
-		return(write(1, "Error\n", 6)); */ //! does not work yet!!
+	if (check_for_duplicates(ac, av) == false)
+		return(write(1, "Error\n", 6));
 	head_a = NULL;
 	i = ac - 1;
 	head_a = create_new_list(head_a, i, av);
@@ -88,6 +74,5 @@ int	main(int ac, char **av)
 		if (ac > 6)
 			head_a = insertion(head_a);
 	}
-	//printlist(head_a); //!
 	freememory(head_a);
 }
