@@ -42,6 +42,7 @@ bool	check_for_duplicates(long int *array, long int c, int ac)
 	return (true);
 }
 
+/* without long int check would not work! */
 bool	check_duplicates(int ac, char **av)
 {
 	int	i;
