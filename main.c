@@ -28,24 +28,47 @@ bool	check_if_digit(char *avi)
 	return (true);
 }
 
+bool	check_for_duplicates(int *array, int c, int ac)
+{
+	int		i;
+
+	i = 0;
+	while (i < ac)
+	{
+		if (array[i] == c)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 bool	check_duplicates(int ac, char **av)
 {
 	int	i;
 	int x;
 	int *array;
 
+	array = (int *)malloc(sizeof(int) * ac);
+	if (!array)
+		return (false);
 	i = 0;
 	while (i < ac)
 	{
 		x = ft_atoi(av[i + 1]);
 		if (x > INT_MAX || x < INT_MIN)
+		{
+			free(array);
 			return (false);
-		i++;
+		}
 		array[i] = x;
 		if (check_for_duplicates(array, array[i], i) == false)
+		{
+			free(array);
 			return (false);
+		}
 		i++;
 	}
+	free (array);
 	return (true);
 }
 
@@ -60,32 +83,10 @@ bool	check_valid_input(int ac, char **av)
 			return (false);
 		i++;
 	}
-	if (check_duplicates(ac -1, av) == false)
+	if (check_duplicates(ac, av) == false)
 		return (false);
 	/* if (!is_valid_integer(n, argv))
 		return (false); */
-	return (true);
-}
-
-bool	check_for_duplicates(int *array, int c, int ac)
-{
-	int		i;
-	int		j;
-	char	*c;
-
-	i = 0;
-	while (i < ac - 1)//! or <=
-	{
-		c = av[i];
-		j = i + 1;
-		while (av[j])
-		{
-			if (c == av[i + j])
-				return(false);
-			j++;
-		}
-		i++;
-	}
 	return (true);
 }
 
