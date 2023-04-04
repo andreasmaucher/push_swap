@@ -12,21 +12,38 @@
 
 #include "push_swap.h"
 
-bool check_if_digit(int ac, char **av)
+bool	is_valid_number(char *avi)
 {
 	int	i;
 
 	i = 0;
-	while (i <= ac -1)
+	if (avi[i] == '-' || avi[i] == '+')
+		i++;
+	while (avi[i] != '\0')
 	{
-		while (av[i])
-		{
-			if (!ft_isdigit(av[i]))
-				return (false)
-		}
+		if (ft_isdigit(avi[i]) == false)
+			return (false);
+		i++;
 	}
+	return (true);
 }
 
+bool	is_valid_input(int ac, char **av)
+{
+	int	i;
+
+	i = 1;
+	while (i <= ac)
+	{
+		if (is_valid_number(av[i]) == false)
+			return (false);
+		i++;
+	}
+	/* if (!is_valid_integer(n, argv))
+		return (false); */
+	return (true);
+}
+/* 
 bool	check_valid_input(int ac, char **av)
 {
 	int	i;
@@ -62,7 +79,7 @@ bool	check_for_duplicates(int ac, char **av)
 		i++;
 	}
 	return (true);
-}
+} */
 
 /* if no parameters specified give control back to the user */
 
@@ -73,9 +90,7 @@ int	main(int ac, char **av)
 
 	if (ac == 1)
 		return (0);
-	if (check_valid_input(ac, av) == false)
-		return(write(1, "Error\n", 6));
-	if (check_for_duplicates(ac, av) == false)
+	if (is_valid_input(ac - 1, av) == false)
 		return(write(1, "Error\n", 6));
 	head_a = NULL;
 	i = ac - 1;

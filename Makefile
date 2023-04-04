@@ -12,7 +12,7 @@
 
 SRCS = main.c list_operators.c utils.c rules.c move_counter.c \
 ft_split.c sorter.c target_values.c rules2.c algorithm.c list_operators2.c \
-calculations.c \
+calculations.c utils2.c \
 
 OBJS = $(SRCS:.c=.o)
 
