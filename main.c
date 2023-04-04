@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-bool	is_valid_number(char *avi)
+bool	check_if_digit(char *avi)
 {
 	int	i;
 
@@ -28,38 +28,46 @@ bool	is_valid_number(char *avi)
 	return (true);
 }
 
-bool	is_valid_input(int ac, char **av)
+bool	check_duplicates(int ac, char **av)
+{
+	int	i;
+	int x;
+	int *array;
+
+	i = 0;
+	while (i < ac)
+	{
+		x = ft_atoi(av[i + 1]);
+		if (x > INT_MAX || x < INT_MIN)
+			return (false);
+		i++;
+		array[i] = x;
+		if (check_for_duplicates(array, array[i], i) == false)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+bool	check_valid_input(int ac, char **av)
 {
 	int	i;
 
 	i = 1;
 	while (i <= ac)
 	{
-		if (is_valid_number(av[i]) == false)
+		if (check_if_digit(av[i]) == false)
 			return (false);
 		i++;
 	}
+	if (check_duplicates(ac -1, av) == false)
+		return (false);
 	/* if (!is_valid_integer(n, argv))
 		return (false); */
 	return (true);
 }
-/* 
-bool	check_valid_input(int ac, char **av)
-{
-	int	i;
 
-	i = ac - 1;
-	while (i >= 1)
-	{
-		if (ft_atoi(av[i]) <= INT_MAX && ft_atoi(av[i]) >= INT_MIN)
-		i--;
-		else
-			return (false);
-	}
-	return (true);
-}
-
-bool	check_for_duplicates(int ac, char **av)
+bool	check_for_duplicates(int *array, int c, int ac)
 {
 	int		i;
 	int		j;
@@ -79,10 +87,9 @@ bool	check_for_duplicates(int ac, char **av)
 		i++;
 	}
 	return (true);
-} */
+}
 
 /* if no parameters specified give control back to the user */
-
 int	main(int ac, char **av)
 {
 	node_t	*head_a;
@@ -90,7 +97,7 @@ int	main(int ac, char **av)
 
 	if (ac == 1)
 		return (0);
-	if (is_valid_input(ac - 1, av) == false)
+	if (check_valid_input(ac - 1, av) == false)
 		return(write(1, "Error\n", 6));
 	head_a = NULL;
 	i = ac - 1;
