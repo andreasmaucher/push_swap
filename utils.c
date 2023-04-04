@@ -69,11 +69,12 @@ void	freememory(node_t *head)
 	}
 }
 
-int	ft_atoi(const char *nptr)
+/* adjusted original atoi by adding long int */
+long int	ft_atoi(const char *nptr)
 {
-	int	i;
-	int	sign;
-	int	res;
+	long int	i;
+	long int	sign;
+	long int	res;
 
 	i = 0;
 	sign = 1;

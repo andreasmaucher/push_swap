@@ -28,7 +28,7 @@ bool	check_if_digit(char *avi)
 	return (true);
 }
 
-bool	check_for_duplicates(int *array, int c, int ac)
+bool	check_for_duplicates(long int *array, long int c, int ac)
 {
 	int		i;
 
@@ -45,10 +45,10 @@ bool	check_for_duplicates(int *array, int c, int ac)
 bool	check_duplicates(int ac, char **av)
 {
 	int	i;
-	int x;
-	int *array;
+	long int x;
+	long int *array;
 
-	array = (int *)malloc(sizeof(int) * ac);
+	array = (long int *)malloc(sizeof(long int) * ac);
 	if (!array)
 		return (false);
 	i = 0;

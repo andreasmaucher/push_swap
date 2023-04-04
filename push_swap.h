@@ -45,7 +45,7 @@ size_t	ft_strlen(const char *s);
 int	lst_size(node_t *head);
 bool	check_if_sorted(node_t *head);
 void	freememory(node_t *head);
-int	ft_atoi(const char *nptr);
+long int	ft_atoi(const char *nptr);
 bool	ft_isdigit(int c);
 
 /*target values*/
