@@ -12,6 +12,21 @@
 
 #include "push_swap.h"
 
+bool check_if_digit(int ac, char **av)
+{
+	int	i;
+
+	i = 0;
+	while (i <= ac -1)
+	{
+		while (av[i])
+		{
+			if (!ft_isdigit(av[i]))
+				return (false)
+		}
+	}
+}
+
 bool	check_valid_input(int ac, char **av)
 {
 	int	i;
