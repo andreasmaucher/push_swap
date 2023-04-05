@@ -43,33 +43,29 @@ bool	check_for_duplicates(long int *array, long int c, int ac)
 }
 
 /* without long int check would not work! */
-bool	check_duplicates(int ac, char **av)
+bool	check_int_range(int ac, char **av)
 {
-	int	i;
-	long int x;
-	long int *array;
+	int			i;
+	long int	x;
+	long int	*arr;
+	int			check;
 
-	array = (long int *)malloc(sizeof(long int) * ac);
-	if (!array)
+	arr = (long int *)malloc(sizeof(long int) * ac);
+	if (!arr)
 		return (false);
 	i = 0;
 	while (i < ac)
 	{
 		x = ft_atoi(av[i + 1]);
 		if (x > INT_MAX || x < INT_MIN)
-		{
-			free(array);
-			return (false);
-		}
-		array[i] = x;
-		if (check_for_duplicates(array, array[i], i) == false)
-		{
-			free(array);
-			return (false);
-		}
-		i++;
+			check = false;
+		arr[i] = x;
+		if (check_for_duplicates(arr, arr[i], i) == false)
+			check = false;
 	}
-	free (array);
+	free (arr);
+	if (check == false)
+		return (false);
 	return (true);
 }
 
@@ -84,10 +80,8 @@ bool	check_valid_input(int ac, char **av)
 			return (false);
 		i++;
 	}
-	if (check_duplicates(ac, av) == false)
+	if (check_int_range(ac, av) == false)
 		return (false);
-	/* if (!is_valid_integer(n, argv))
-		return (false); */
 	return (true);
 }
 
@@ -95,12 +89,12 @@ bool	check_valid_input(int ac, char **av)
 int	main(int ac, char **av)
 {
 	node_t	*head_a;
-	int	i;
+	int		i;
 
 	if (ac == 1)
 		return (0);
 	if (check_valid_input(ac - 1, av) == false)
-		return(write(1, "Error\n", 6));
+		return (write(1, "Error\n", 6));
 	head_a = NULL;
 	i = ac - 1;
 	head_a = create_new_list(head_a, i, av);
