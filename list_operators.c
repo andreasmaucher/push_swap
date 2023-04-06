@@ -14,14 +14,18 @@
 
 node_t	*create_new_node(int value)
 {
-	node_t *newnode = malloc(sizeof(node_t));
+	node_t	*newnode;
+
+	newnode = malloc(sizeof(node_t));
+	if (newnode == NULL)
+		return (NULL);
 	newnode->value = value;
 	newnode->next = NULL;
-	return newnode;
+	return (newnode);
 }
 
 /* we use a double pointer because we want to change the value of a pointer */
-node_t *new_list_insert_at_head(node_t **head, node_t *node_to_insert)
+node_t	*new_list_insert_at_head(node_t **head, node_t *node_to_insert)
 {
 	node_to_insert->next = *head;
 	*head = node_to_insert;
@@ -30,7 +34,7 @@ node_t *new_list_insert_at_head(node_t **head, node_t *node_to_insert)
 
 node_t	*insert_at_head(node_t *head, int new_value)
 {
-	node_t *new_head;
+	node_t	*new_head;
 
 	new_head = create_new_node(new_value);
 	if (head == NULL)
@@ -42,20 +46,24 @@ node_t	*insert_at_head(node_t *head, int new_value)
 	}
 }
 
-node_t *delete_at_head(node_t *old_head)
+node_t	*delete_at_head(node_t *old_head)
 {
-	node_t *new_head = old_head->next;
+	node_t	*new_head;
+
+	new_head = old_head->next;
 	free(old_head);
 	return (new_head);
 }
 
-node_t *insert_at_tail(node_t *head, int new_value)
+node_t	*insert_at_tail(node_t *head, int new_value)
 {
-	node_t *new_node;
+	node_t	*new_node;
+	node_t	*current;
 
 	new_node = malloc(sizeof(node_t));
+	if (new_node == NULL)
+		return (NULL);
 	new_node->value = new_value;
-	node_t *current;
 	current = head;
 	while (current->next != NULL)
 		current = current->next;

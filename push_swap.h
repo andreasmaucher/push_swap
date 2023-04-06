@@ -13,27 +13,28 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <limits.h>
-#include <aio.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include <limits.h>
+# include <aio.h>
 
-typedef struct s_sort_params 
+typedef struct s_sort_params
 {
 	int		value;
 	int		index;
 }	t_sort_params;
 
-/* a node is a structure (data & link part) so this must be a pointer to a struct */
-struct	node
+/* a node is a structure (data & link part) so this must be a pointer
+ to a struct */
+struct	s_node
 {
 	int	value;
 	int	index;
-	struct node *next;
+	struct s_node *next;
 };
-typedef struct node node_t;
+typedef struct s_node node_t;
 
 /*sorter*/
 node_t	*three_sorter(node_t *h);
@@ -47,12 +48,14 @@ bool	check_if_sorted(node_t *head);
 void	freememory(node_t *head);
 long int	ft_atoi(const char *nptr);
 bool	ft_isdigit(int c);
+int	return_middle_value(node_t *head, int lsize);
+bool	loop_for_duplicates(long int *array, long int c, int ac);
+node_t	*creating_list_b(node_t *head_a);
 
 /*target values*/
 t_sort_params	find_largest_value(node_t *head);
 int	find_smallest_number(node_t *head);
 t_sort_params	find_smallest_from_top(node_t *head, int ceiling);
-int	return_middle_value(node_t *head, int lsize);
 t_sort_params	find_smallest_from_bottom(node_t *head, int ceiling);
 int	find_third_highest_value(node_t *head);
 
@@ -96,7 +99,6 @@ int	calculate_ceiling(int ceiling, node_t *head_a);
 /*algorithm*/
 node_t	*ra_vs_rra(node_t *head, t_sort_params first, t_sort_params last);
 node_t	*find_shortest_path(node_t *head, int ceiling);
-node_t	*creating_list_b(node_t *head_a);
 node_t	*list_b_condition(node_t *head_b, node_t *head_a, int ceiling);
 node_t	*move_to_a(node_t *head_a, node_t *head_b);
 node_t	*insertion(node_t *head_a);

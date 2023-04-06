@@ -25,8 +25,8 @@ size_t	ft_strlen(const char *s)
 /* determine the size of a list */
 int	lst_size(node_t *head)
 {
-	int lsize;
-	node_t *current_node_pos;
+	int		lsize;
+	node_t	*current_node_pos;
 
 	lsize = 0;
 	current_node_pos = head;

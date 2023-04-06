@@ -28,27 +28,11 @@ bool	check_if_digit(char *avi)
 	return (true);
 }
 
-bool	check_for_duplicates(long int *array, long int c, int ac)
-{
-	int		i;
-
-	i = 0;
-	while (i < ac)
-	{
-		if (array[i] == c)
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
-/* without long int check would not work! */
 bool	check_int_range(int ac, char **av)
 {
 	int			i;
 	long int	x;
 	long int	*arr;
-	int			check;
 
 	arr = (long int *)malloc(sizeof(long int) * ac);
 	if (!arr)
@@ -58,14 +42,39 @@ bool	check_int_range(int ac, char **av)
 	{
 		x = ft_atoi(av[i + 1]);
 		if (x > INT_MAX || x < INT_MIN)
-			check = false;
-		arr[i] = x;
-		if (check_for_duplicates(arr, arr[i], i) == false)
-			check = false;
+		{
+			free (arr);
+			return (false);
+		}
+		i++;
 	}
 	free (arr);
-	if (check == false)
-		return (false);
+	return (true);
+}
+
+/* without long int check would not work! */
+bool	check_duplicates(int ac, char **av)
+{
+	int			i;
+	long int	x;
+	long int	*arr;
+
+	arr = (long int *)malloc(sizeof(long int) * ac);
+	if (arr == NULL)
+		return (NULL);
+	i = 0;
+	while (i < ac)
+	{
+		x = ft_atoi(av[i + 1]);
+		arr[i] = x;
+		if (loop_for_duplicates(arr, arr[i], i) == false)
+		{
+			free (arr);
+			return (false);
+		}
+		i++;
+	}
+	free (arr);
 	return (true);
 }
 
@@ -81,6 +90,8 @@ bool	check_valid_input(int ac, char **av)
 		i++;
 	}
 	if (check_int_range(ac, av) == false)
+		return (false);
+	if (check_duplicates(ac, av) == false)
 		return (false);
 	return (true);
 }

@@ -68,21 +68,6 @@ t_sort_params	find_smallest_from_top(node_t *head, int ceiling)
 	return (first);
 }
 
-int	return_middle_value(node_t *head, int lsize)
-{
-	node_t	*tmp;
-	int		counter;
-
-	tmp = head;
-	counter = 0;
-	while (counter < lsize / 2)
-	{
-		tmp = tmp->next;
-		counter++;
-	}
-	return (tmp->value);
-}
-
 t_sort_params	find_smallest_from_bottom(node_t *head, int ceiling)
 {
 	t_sort_params	last;

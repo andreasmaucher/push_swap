@@ -46,20 +46,6 @@ node_t	*find_shortest_path(node_t *head, int ceiling)
 	return (head);
 }
 
-/* first time creating list b */
-node_t	*creating_list_b(node_t *head_a)
-{
-	node_t	*tmp;
-	node_t	*head_b;
-
-	head_b = NULL;
-	tmp = head_a;
-	tmp = create_new_node(tmp->value);
-	tmp->next = head_b;
-	free(tmp);
-	return (head_b);
-}
-
 node_t	*list_b_condition(node_t *head_b, node_t *head_a, int ceiling)
 {
 	int	ratio;

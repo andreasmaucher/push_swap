@@ -24,15 +24,13 @@
 	}
 	printf("\n");
 } */
-
-node_t *delete_at_tail(node_t *head)
+node_t	*delete_at_tail(node_t *head)
 {
-	node_t *current;
-	node_t *prev;
+	node_t	*current;
+	node_t	*prev;
 
 	current = head;
 	prev = NULL;
-
 	while (current->next != NULL)
 	{
 		prev = current;
@@ -43,11 +41,10 @@ node_t *delete_at_tail(node_t *head)
 	return (head);
 }
 
-node_t *return_tail_value(node_t *head)
+node_t	*return_tail_value(node_t *head)
 {
-	node_t *current_node_pos;
-
-	int lsize;
+	node_t	*current_node_pos;
+	int		lsize;
 
 	current_node_pos = head;
 	lsize = lst_size(head);
@@ -59,10 +56,10 @@ node_t *return_tail_value(node_t *head)
 	return (current_node_pos);
 }
 
-node_t *delete_second_node(node_t *head)
+node_t	*delete_second_node(node_t *head)
 {
-	node_t *current;
-	node_t *prev;
+	node_t	*current;
+	node_t	*prev;
 
 	current = malloc(sizeof(node_t));
 	if (current == NULL)
@@ -72,7 +69,6 @@ node_t *delete_second_node(node_t *head)
 	if (prev == NULL)
 		return (NULL);
 	prev = NULL;
-
 	while (current->next != NULL)
 	{
 		prev = current;
@@ -83,11 +79,12 @@ node_t *delete_second_node(node_t *head)
 	return (head);
 }
 
-/* to create the new list from scratch; last input number is first added as head*/
+/* to create the new list from scratch; last input number is 
+first added as head*/
 node_t	*create_new_list(node_t *head, int i, char **av)
 {
 	node_t	*tmp;
-	int	input;
+	int		input;
 
 	while (i >= 1)
 	{	
