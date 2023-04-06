@@ -12,11 +12,11 @@
 
 #include "push_swap.h"
 
-node_t	*create_new_node(int value)
+t_node	*create_new_node(int value)
 {
-	node_t	*newnode;
+	t_node	*newnode;
 
-	newnode = malloc(sizeof(node_t));
+	newnode = malloc(sizeof(t_node));
 	if (newnode == NULL)
 		return (NULL);
 	newnode->value = value;
@@ -25,16 +25,16 @@ node_t	*create_new_node(int value)
 }
 
 /* we use a double pointer because we want to change the value of a pointer */
-node_t	*new_list_insert_at_head(node_t **head, node_t *node_to_insert)
+t_node	*new_list_insert_at_head(t_node **head, t_node *t_nodeo_insert)
 {
-	node_to_insert->next = *head;
-	*head = node_to_insert;
-	return (node_to_insert);
+	t_nodeo_insert->next = *head;
+	*head = t_nodeo_insert;
+	return (t_nodeo_insert);
 }
 
-node_t	*insert_at_head(node_t *head, int new_value)
+t_node	*insert_at_head(t_node *head, int new_value)
 {
-	node_t	*new_head;
+	t_node	*new_head;
 
 	new_head = create_new_node(new_value);
 	if (head == NULL)
@@ -46,21 +46,21 @@ node_t	*insert_at_head(node_t *head, int new_value)
 	}
 }
 
-node_t	*delete_at_head(node_t *old_head)
+t_node	*delete_at_head(t_node *old_head)
 {
-	node_t	*new_head;
+	t_node	*new_head;
 
 	new_head = old_head->next;
 	free(old_head);
 	return (new_head);
 }
 
-node_t	*insert_at_tail(node_t *head, int new_value)
+t_node	*insert_at_tail(t_node *head, int new_value)
 {
-	node_t	*new_node;
-	node_t	*current;
+	t_node	*new_node;
+	t_node	*current;
 
-	new_node = malloc(sizeof(node_t));
+	new_node = malloc(sizeof(t_node));
 	if (new_node == NULL)
 		return (NULL);
 	new_node->value = new_value;

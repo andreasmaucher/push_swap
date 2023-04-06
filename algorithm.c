@@ -13,7 +13,7 @@
 #include "push_swap.h"
 
 /* calculate whether ra or rra is the shortest path */
-node_t	*ra_vs_rra(node_t *head, t_sort_params first, t_sort_params last)
+t_node	*ra_vs_rra(t_node *head, t_sort_params first, t_sort_params last)
 {
 	int				ra_count_top;
 	int				rra_count_bottom;
@@ -34,7 +34,7 @@ node_t	*ra_vs_rra(node_t *head, t_sort_params first, t_sort_params last)
 }
 
 /* optimal move */
-node_t	*find_shortest_path(node_t *head, int ceiling)
+t_node	*find_shortest_path(t_node *head, int ceiling)
 {
 	t_sort_params	first;
 	t_sort_params	last;
@@ -46,7 +46,7 @@ node_t	*find_shortest_path(node_t *head, int ceiling)
 	return (head);
 }
 
-node_t	*list_b_condition(node_t *head_b, node_t *head_a, int ceiling)
+t_node	*list_b_condition(t_node *head_b, t_node *head_a, int ceiling)
 {
 	int	ratio;
 
@@ -57,7 +57,7 @@ node_t	*list_b_condition(node_t *head_b, node_t *head_a, int ceiling)
 	return (head_b);
 }
 
-node_t	*move_to_a(node_t *head_a, node_t *head_b)
+t_node	*move_to_a(t_node *head_a, t_node *head_b)
 {
 	t_sort_params	max;
 	int				ra_count_top;
@@ -87,10 +87,10 @@ node_t	*move_to_a(node_t *head_a, node_t *head_b)
 
 /* ceiling > find_third_highest_value only relevant in the end*/
 /* we want the last 3 values to remain in the head */
-node_t	*insertion(node_t *head_a)
+t_node	*insertion(t_node *head_a)
 {
 	int				ceiling;
-	node_t			*head_b;
+	t_node			*head_b;
 	t_sort_params	first;
 	t_sort_params	last;
 

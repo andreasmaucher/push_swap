@@ -13,9 +13,9 @@
 #include "push_swap.h"
 
 /* only for testing purposes */
-/* void	printlist(node_t *head)
+/* void	printlist(t_node *head)
 {
-	node_t *temporary = head;
+	t_node *temporary = head;
 
 	while (temporary != NULL)
 	{
@@ -24,10 +24,10 @@
 	}
 	printf("\n");
 } */
-node_t	*delete_at_tail(node_t *head)
+t_node	*delete_at_tail(t_node *head)
 {
-	node_t	*current;
-	node_t	*prev;
+	t_node	*current;
+	t_node	*prev;
 
 	current = head;
 	prev = NULL;
@@ -41,9 +41,9 @@ node_t	*delete_at_tail(node_t *head)
 	return (head);
 }
 
-node_t	*return_tail_value(node_t *head)
+t_node	*return_tail_value(t_node *head)
 {
-	node_t	*current_node_pos;
+	t_node	*current_node_pos;
 	int		lsize;
 
 	current_node_pos = head;
@@ -56,16 +56,16 @@ node_t	*return_tail_value(node_t *head)
 	return (current_node_pos);
 }
 
-node_t	*delete_second_node(node_t *head)
+t_node	*delete_second_node(t_node *head)
 {
-	node_t	*current;
-	node_t	*prev;
+	t_node	*current;
+	t_node	*prev;
 
-	current = malloc(sizeof(node_t));
+	current = malloc(sizeof(t_node));
 	if (current == NULL)
 		return (NULL);
 	current = head;
-	prev = malloc(sizeof(node_t));
+	prev = malloc(sizeof(t_node));
 	if (prev == NULL)
 		return (NULL);
 	prev = NULL;
@@ -81,9 +81,9 @@ node_t	*delete_second_node(node_t *head)
 
 /* to create the new list from scratch; last input number is 
 first added as head*/
-node_t	*create_new_list(node_t *head, int i, char **av)
+t_node	*create_new_list(t_node *head, int i, char **av)
 {
-	node_t	*tmp;
+	t_node	*tmp;
 	int		input;
 
 	while (i >= 1)

@@ -12,10 +12,10 @@
 
 #include "push_swap.h"
 
-t_sort_params	find_largest_value(node_t *head)
+t_sort_params	find_largest_value(t_node *head)
 {
 	t_sort_params	max;
-	node_t			*tmp;
+	t_node			*tmp;
 
 	max.value = INT_MIN;
 	tmp = head;
@@ -28,10 +28,10 @@ t_sort_params	find_largest_value(node_t *head)
 	return (max);
 }
 
-int	find_smallest_number(node_t *head)
+int	find_smallest_number(t_node *head)
 {
 	int		min;
-	node_t	*tmp;
+	t_node	*tmp;
 
 	min = INT_MAX;
 	tmp = head;
@@ -44,12 +44,12 @@ int	find_smallest_number(node_t *head)
 	return (min);
 }
 
-t_sort_params	find_smallest_from_top(node_t *head, int ceiling)
+t_sort_params	find_smallest_from_top(t_node *head, int ceiling)
 {
 	t_sort_params	first;
 	int				middle;
 	int				lsize;
-	node_t			*tmp_head;
+	t_node			*tmp_head;
 
 	tmp_head = head;
 	lsize = lst_size(head);
@@ -68,12 +68,12 @@ t_sort_params	find_smallest_from_top(node_t *head, int ceiling)
 	return (first);
 }
 
-t_sort_params	find_smallest_from_bottom(node_t *head, int ceiling)
+t_sort_params	find_smallest_from_bottom(t_node *head, int ceiling)
 {
 	t_sort_params	last;
 	int				middle;
 	int				lsize;
-	node_t			*tmp_head;
+	t_node			*tmp_head;
 
 	tmp_head = head;
 	lsize = lst_size(head);
@@ -93,7 +93,7 @@ t_sort_params	find_smallest_from_bottom(node_t *head, int ceiling)
 	return (last);
 }
 
-int	find_third_highest_value(node_t *head)
+int	find_third_highest_value(t_node *head)
 {
 	int	first;
 	int	second;

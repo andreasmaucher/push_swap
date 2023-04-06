@@ -13,10 +13,10 @@
 #include "push_swap.h"
 
 /* h = head, t = tail node, s = second node */
-node_t	*three_sorter(node_t *h)
+t_node	*three_sorter(t_node *h)
 {
-	node_t	*s;
-	node_t	*t;
+	t_node	*s;
+	t_node	*t;
 
 	while (check_if_sorted(h) == false)
 	{
@@ -42,11 +42,11 @@ node_t	*three_sorter(node_t *h)
 	return (h);
 }
 
-node_t	*five_sorter_add_two(node_t *head)
+t_node	*five_sorter_add_two(t_node *head)
 {
-	node_t	*second;
-	node_t	*third;
-	node_t	*tail;
+	t_node	*second;
+	t_node	*third;
+	t_node	*tail;
 
 	second = head->next;
 	third = second->next;
@@ -69,10 +69,10 @@ node_t	*five_sorter_add_two(node_t *head)
 
 /* first time creating list b! */
 /* push first two nodes of a to b to be able to apply three_sort logic */
-node_t	*five_sorter(node_t *head_a)
+t_node	*five_sorter(t_node *head_a)
 {
-	node_t	*head_b;
-	node_t	*tmp;
+	t_node	*head_b;
+	t_node	*tmp;
 	int		counter;
 
 	counter = 2;

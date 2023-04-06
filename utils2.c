@@ -33,9 +33,9 @@ bool	loop_for_duplicates(long int *array, long int c, int ac)
 	return (true);
 }
 
-int	return_middle_value(node_t *head, int lsize)
+int	return_middle_value(t_node *head, int lsize)
 {
-	node_t	*tmp;
+	t_node	*tmp;
 	int		counter;
 
 	tmp = head;
@@ -49,10 +49,10 @@ int	return_middle_value(node_t *head, int lsize)
 }
 
 /* first time creating list b */
-node_t	*creating_list_b(node_t *head_a)
+t_node	*creating_list_b(t_node *head_a)
 {
-	node_t	*tmp;
-	node_t	*head_b;
+	t_node	*tmp;
+	t_node	*head_b;
 
 	head_b = NULL;
 	tmp = head_a;

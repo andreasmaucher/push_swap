@@ -14,10 +14,10 @@
 
 /* RULE sa swap first two elements */
 /* do nothing if there is only one or no elements*/
-node_t	*swap_a(node_t *head)
+t_node	*swap_a(t_node *head)
 {
-	node_t	*old_head;
-	node_t	*new_second_node;
+	t_node	*old_head;
+	t_node	*new_second_node;
 
 	if (head->next != NULL && head != NULL)
 	{
@@ -33,10 +33,10 @@ node_t	*swap_a(node_t *head)
 }
 
 /* RULE sb swap first two elements */
-node_t	*swap_b(node_t *head)
+t_node	*swap_b(t_node *head)
 {
-	node_t	*old_head;
-	node_t	*new_second_node;
+	t_node	*old_head;
+	t_node	*new_second_node;
 
 	if (head->next != NULL && head != NULL)
 	{
@@ -52,9 +52,9 @@ node_t	*swap_b(node_t *head)
 }
 
 /* RULE ra rotate so that the first element becomes the last one */
-node_t	*rotate_a(node_t *head)
+t_node	*rotate_a(t_node *head)
 {
-	node_t	*temp_head;
+	t_node	*temp_head;
 
 	temp_head = head;
 	head = insert_at_tail(head, temp_head->value);
@@ -64,9 +64,9 @@ node_t	*rotate_a(node_t *head)
 }
 
 /* RULE rb rotate so that the first element becomes the last one */
-node_t	*rotate_b(node_t *head)
+t_node	*rotate_b(t_node *head)
 {
-	node_t	*temp_head;
+	t_node	*temp_head;
 
 	temp_head = head;
 	head = insert_at_tail(head, temp_head->value);

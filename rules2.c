@@ -13,9 +13,9 @@
 #include "push_swap.h"
 
 /* RULE pb take first node of a and push it at top of b */
-node_t	*push_to_b(node_t *head_b, node_t *head_a)
+t_node	*push_to_b(t_node *head_b, t_node *head_a)
 {
-	node_t	*tmp;
+	t_node	*tmp;
 
 	tmp = head_a;
 	head_b = insert_at_head(head_b, tmp->value);
@@ -24,9 +24,9 @@ node_t	*push_to_b(node_t *head_b, node_t *head_a)
 }
 
 /* RULE pa take first node of b and push it at top of a */
-node_t	*push_to_a(node_t *head_a, node_t *head_b)
+t_node	*push_to_a(t_node *head_a, t_node *head_b)
 {
-	node_t	*tmp;
+	t_node	*tmp;
 
 	tmp = head_b;
 	head_a = insert_at_head(head_a, tmp->value);
@@ -35,9 +35,9 @@ node_t	*push_to_a(node_t *head_a, node_t *head_b)
 }
 
 /* RULE rra reverse rotate so that the last element becomes the first one */
-node_t	*reverse_rotate_a(node_t *head)
+t_node	*reverse_rotate_a(t_node *head)
 {
-	node_t	*temp_tail;
+	t_node	*temp_tail;
 
 	temp_tail = return_tail_value(head);
 	head = insert_at_head(head, temp_tail->value);
@@ -47,9 +47,9 @@ node_t	*reverse_rotate_a(node_t *head)
 }
 
 /* RULE rrb reverse rotate */
-node_t	*reverse_rotate_b(node_t *head)
+t_node	*reverse_rotate_b(t_node *head)
 {
-	node_t	*temp_tail;
+	t_node	*temp_tail;
 
 	temp_tail = return_tail_value(head);
 	head = insert_at_head(head, temp_tail->value);

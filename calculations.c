@@ -32,7 +32,7 @@ int	calculate_ratio(int length)
 	}
 }
 
-int	calculate_ceiling(int ceiling, node_t *head_a)
+int	calculate_ceiling(int ceiling, t_node *head_a)
 {
 	int	ratio;
 

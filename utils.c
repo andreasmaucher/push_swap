@@ -23,10 +23,10 @@ size_t	ft_strlen(const char *s)
 }
 
 /* determine the size of a list */
-int	lst_size(node_t *head)
+int	lst_size(t_node *head)
 {
 	int		lsize;
-	node_t	*current_node_pos;
+	t_node	*current_node_pos;
 
 	lsize = 0;
 	current_node_pos = head;
@@ -39,10 +39,10 @@ int	lst_size(node_t *head)
 }
 
 /* check whether the next node is always greater than the previous node */
-bool	check_if_sorted(node_t *head)
+bool	check_if_sorted(t_node *head)
 {
-	node_t	*current;
-	node_t	*prev;
+	t_node	*current;
+	t_node	*prev;
 
 	current = head;
 	prev = NULL;
@@ -57,15 +57,15 @@ bool	check_if_sorted(node_t *head)
 }
 
 /* to free up all memory in the end*/
-void	freememory(node_t *head)
+void	freememory(t_node *head)
 {
-	node_t	*node_to_delete;
+	t_node	*t_nodeo_delete;
 
 	while (head != NULL)
 	{
-		node_to_delete = head;
+		t_nodeo_delete = head;
 		head = head->next;
-		free(node_to_delete);
+		free(t_nodeo_delete);
 	}
 }
 

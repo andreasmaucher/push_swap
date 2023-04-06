@@ -99,7 +99,7 @@ bool	check_valid_input(int ac, char **av)
 /* if no parameters specified give control back to the user */
 int	main(int ac, char **av)
 {
-	node_t	*head_a;
+	t_node	*head_a;
 	int		i;
 
 	if (ac == 1)
