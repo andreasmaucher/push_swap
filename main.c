@@ -113,9 +113,9 @@ int	main(int ac, char **av)
 	{
 		if (ac <= 4)
 			head_a = three_sorter(head_a);
-		if (ac <= 6 && ac > 4)
+		if (ac == 6)
 			head_a = five_sorter(head_a);
-		if (ac > 6)
+		if (ac > 4)
 			head_a = insertion(head_a);
 	}
 	freememory(head_a);

@@ -12,23 +12,23 @@
 
 #include "push_swap.h"
 
-int	calculate_ratio(int length)
+int	calculate_ratio(int n)
 {
-	if (length < 10)
+	if (n < 10)
 	{
 		return (1);
 	}
-	else if (length < 100)
+	else if (n < 100)
 	{
-		return ((length - 10) * 0.04 + 1);
+		return ((n - 10) * 0.06 + 1);
 	}
-	else if (length < 500)
+	else if (n < 500)
 	{
-		return ((length - 100) * 0.02 + 14);
+		return ((n - 100) * 0.02 + 14);
 	}
 	else
 	{
-		return ((length - 500) * 0.006 + 30);
+		return ((n - 500) * 0.006 + 30);
 	}
 }
 

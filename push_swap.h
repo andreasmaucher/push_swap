@@ -52,7 +52,7 @@ int				lst_size(t_node *head);
 int				find_third_highest_value(t_node *head);
 int				find_smallest_number(t_node *head);
 /*calculations*/
-int				calculate_ratio(int length);
+int				calculate_ratio(int n);
 int				calculate_ceiling(int ceiling, t_node *head_a);
 /*move counter*/
 int				rotate_counter(t_node *head, t_index min_max);
@@ -102,8 +102,8 @@ t_node			*insertion(t_node *head_a);
 /*ft_split*/
 char			**ft_split(char const *s, char c);
 
-t_index	find_largest_value(t_node *head);
-t_index	find_smallest_from_top(t_node *head, int ceiling);
-t_index	find_smallest_from_bottom(t_node *head, int ceiling);
+t_index			find_largest_value(t_node *head);
+t_index			find_smallest_from_top(t_node *head, int ceiling);
+t_index			find_smallest_from_bottom(t_node *head, int ceiling);
 
 #endif

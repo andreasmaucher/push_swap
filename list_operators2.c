@@ -13,17 +13,19 @@
 #include "push_swap.h"
 
 /* only for testing purposes */
-/* void	printlist(t_node *head)
+void	printlist(t_node *head)
 {
-	t_node *temporary = head;
+	t_node	*temporary;
 
+	temporary = head;
 	while (temporary != NULL)
 	{
 		printf("%d - ", temporary->value);
 		temporary = temporary->next;
 	}
 	printf("\n");
-} */
+}
+
 t_node	*delete_at_tail(t_node *head)
 {
 	t_node	*current;

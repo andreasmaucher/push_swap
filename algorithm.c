@@ -15,8 +15,8 @@
 /* calculate whether ra or rra is the shortest path */
 t_node	*ra_vs_rra(t_node *head, t_index first, t_index last)
 {
-	int				ra_count_top;
-	int				rra_count_bottom;
+	int	ra_count_top;
+	int	rra_count_bottom;
 
 	ra_count_top = rotate_counter(head, first);
 	rra_count_bottom = reverse_rotate_counter(head, last);
@@ -60,8 +60,8 @@ t_node	*list_b_condition(t_node *head_b, t_node *head_a, int ceiling)
 t_node	*move_to_a(t_node *head_a, t_node *head_b)
 {
 	t_index	max;
-	int				ra_count_top;
-	int				rra_count_bottom;
+	int		ra_count_top;
+	int		rra_count_bottom;
 
 	head_a = three_sorter(head_a);
 	while (lst_size(head_b) > 0)
@@ -89,8 +89,8 @@ t_node	*move_to_a(t_node *head_a, t_node *head_b)
 /* we want the last 3 values to remain in the head */
 t_node	*insertion(t_node *head_a)
 {
-	int				ceiling;
-	t_node			*head_b;
+	int		ceiling;
+	t_node	*head_b;
 	t_index	first;
 	t_index	last;
 

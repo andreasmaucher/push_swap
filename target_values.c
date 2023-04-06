@@ -15,7 +15,7 @@
 t_index	find_largest_value(t_node *head)
 {
 	t_index	max;
-	t_node			*tmp;
+	t_node	*tmp;
 
 	max.value = INT_MIN;
 	tmp = head;
@@ -47,9 +47,9 @@ int	find_smallest_number(t_node *head)
 t_index	find_smallest_from_top(t_node *head, int ceiling)
 {
 	t_index	first;
-	int				middle;
-	int				lsize;
-	t_node			*tmp_head;
+	int		middle;
+	int		lsize;
+	t_node	*tmp_head;
 
 	tmp_head = head;
 	lsize = lst_size(head);
@@ -71,9 +71,9 @@ t_index	find_smallest_from_top(t_node *head, int ceiling)
 t_index	find_smallest_from_bottom(t_node *head, int ceiling)
 {
 	t_index	last;
-	int				middle;
-	int				lsize;
-	t_node			*tmp_head;
+	int		middle;
+	int		lsize;
+	t_node	*tmp_head;
 
 	tmp_head = head;
 	lsize = lst_size(head);
