@@ -13,7 +13,7 @@
 #include "push_swap.h"
 
 /* calculate whether ra or rra is the shortest path */
-t_node	*ra_vs_rra(t_node *head, t_sort_params first, t_sort_params last)
+t_node	*ra_vs_rra(t_node *head, t_index first, t_index last)
 {
 	int				ra_count_top;
 	int				rra_count_bottom;
@@ -36,8 +36,8 @@ t_node	*ra_vs_rra(t_node *head, t_sort_params first, t_sort_params last)
 /* optimal move */
 t_node	*find_shortest_path(t_node *head, int ceiling)
 {
-	t_sort_params	first;
-	t_sort_params	last;
+	t_index	first;
+	t_index	last;
 
 	first = find_smallest_from_top(head, ceiling);
 	last = find_smallest_from_bottom(head, ceiling);
@@ -59,7 +59,7 @@ t_node	*list_b_condition(t_node *head_b, t_node *head_a, int ceiling)
 
 t_node	*move_to_a(t_node *head_a, t_node *head_b)
 {
-	t_sort_params	max;
+	t_index	max;
 	int				ra_count_top;
 	int				rra_count_bottom;
 
@@ -91,8 +91,8 @@ t_node	*insertion(t_node *head_a)
 {
 	int				ceiling;
 	t_node			*head_b;
-	t_sort_params	first;
-	t_sort_params	last;
+	t_index	first;
+	t_index	last;
 
 	head_b = creating_list_b(head_a);
 	ceiling = find_smallest_number(head_a);

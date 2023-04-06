@@ -13,7 +13,7 @@
 #include "push_swap.h"
 
 /* count rotations */
-int	rotate_counter(t_node *head, t_sort_params min_max)
+int	rotate_counter(t_node *head, t_index min_max)
 {
 	t_node	*temp_head;
 	int		counter;
@@ -30,7 +30,7 @@ int	rotate_counter(t_node *head, t_sort_params min_max)
 	return (counter);
 }
 
-int	reverse_rotate_counter(t_node *head, t_sort_params target)
+int	reverse_rotate_counter(t_node *head, t_index target)
 {
 	t_node	*temp_head;
 	int		counter;

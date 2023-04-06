@@ -20,11 +20,11 @@
 # include <limits.h>
 # include <aio.h>
 
-typedef struct s_sort_params
+typedef struct s_index
 {
 	int		value;
 	int		index;
-}	t_sort_params;
+}	t_index;
 
 /* a node is a structure (data & link part) so this must be a pointer
  to a struct */
@@ -55,8 +55,8 @@ int				find_smallest_number(t_node *head);
 int				calculate_ratio(int length);
 int				calculate_ceiling(int ceiling, t_node *head_a);
 /*move counter*/
-int				rotate_counter(t_node *head, t_sort_params min_max);
-int				reverse_rotate_counter(t_node *head, t_sort_params target);
+int				rotate_counter(t_node *head, t_index min_max);
+int				reverse_rotate_counter(t_node *head, t_index target);
 int				find_smallest_number(t_node *head);
 int				find_third_highest_value(t_node *head);
 
@@ -92,8 +92,8 @@ t_node			*delete_second_node(t_node *head);
 t_node			*create_new_list(t_node *head, int i, char **av);
 
 /*algorithm*/
-t_node			*ra_vs_rra(t_node *head, t_sort_params first,
-					t_sort_params last);
+t_node			*ra_vs_rra(t_node *head, t_index first,
+					t_index last);
 t_node			*find_shortest_path(t_node *head, int ceiling);
 t_node			*list_b_condition(t_node *head_b, t_node *head_a, int ceiling);
 t_node			*move_to_a(t_node *head_a, t_node *head_b);
@@ -102,8 +102,8 @@ t_node			*insertion(t_node *head_a);
 /*ft_split*/
 char			**ft_split(char const *s, char c);
 
-t_sort_params	find_largest_value(t_node *head);
-t_sort_params	find_smallest_from_top(t_node *head, int ceiling);
-t_sort_params	find_smallest_from_bottom(t_node *head, int ceiling);
+t_index	find_largest_value(t_node *head);
+t_index	find_smallest_from_top(t_node *head, int ceiling);
+t_index	find_smallest_from_bottom(t_node *head, int ceiling);
 
 #endif

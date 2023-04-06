@@ -12,9 +12,9 @@
 
 #include "push_swap.h"
 
-t_sort_params	find_largest_value(t_node *head)
+t_index	find_largest_value(t_node *head)
 {
-	t_sort_params	max;
+	t_index	max;
 	t_node			*tmp;
 
 	max.value = INT_MIN;
@@ -44,9 +44,9 @@ int	find_smallest_number(t_node *head)
 	return (min);
 }
 
-t_sort_params	find_smallest_from_top(t_node *head, int ceiling)
+t_index	find_smallest_from_top(t_node *head, int ceiling)
 {
-	t_sort_params	first;
+	t_index	first;
 	int				middle;
 	int				lsize;
 	t_node			*tmp_head;
@@ -68,9 +68,9 @@ t_sort_params	find_smallest_from_top(t_node *head, int ceiling)
 	return (first);
 }
 
-t_sort_params	find_smallest_from_bottom(t_node *head, int ceiling)
+t_index	find_smallest_from_bottom(t_node *head, int ceiling)
 {
-	t_sort_params	last;
+	t_index	last;
 	int				middle;
 	int				lsize;
 	t_node			*tmp_head;
