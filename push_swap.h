@@ -62,8 +62,6 @@ int				find_third_highest_value(t_node *head);
 
 /*sorter*/
 t_node			*three_sorter(t_node *h);
-t_node			*five_sorter_add_two(t_node *head);
-t_node			*five_sorter(t_node *head_a);
 t_node			*creating_list_b(t_node *head_a);
 
 /*rules*/
