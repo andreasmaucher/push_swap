@@ -53,7 +53,7 @@ int				find_third_highest_value(t_node *head);
 int				find_smallest_number(t_node *head);
 /*calculations*/
 int				calculate_ratio(int n);
-int				calculate_ceiling(int ceiling, t_node *head_a);
+int				calculate_ceiling(int limit, t_node *head_a);
 /*move counter*/
 int				rotate_counter(t_node *head, t_index min_max);
 int				reverse_rotate_counter(t_node *head, t_index target);
@@ -92,8 +92,8 @@ t_node			*create_new_list(t_node *head, int i, char **av);
 /*algorithm*/
 t_node			*ra_vs_rra(t_node *head, t_index first,
 					t_index last);
-t_node			*find_shortest_path(t_node *head, int ceiling);
-t_node			*list_b_condition(t_node *head_b, t_node *head_a, int ceiling);
+t_node			*find_shortest_path(t_node *head, int limit);
+t_node			*list_b_condition(t_node *head_b, t_node *head_a, int limit);
 t_node			*move_to_a(t_node *head_a, t_node *head_b);
 t_node			*insertion(t_node *head_a);
 
@@ -101,7 +101,7 @@ t_node			*insertion(t_node *head_a);
 char			**ft_split(char const *s, char c);
 
 t_index			find_largest_value(t_node *head);
-t_index			find_smallest_from_top(t_node *head, int ceiling);
-t_index			find_smallest_from_bottom(t_node *head, int ceiling);
+t_index			find_smallest_from_top(t_node *head, int limit);
+t_index			find_smallest_from_bottom(t_node *head, int limit);
 
 #endif

@@ -44,7 +44,7 @@ int	find_smallest_number(t_node *head)
 	return (min);
 }
 
-t_index	find_smallest_from_top(t_node *head, int ceiling)
+t_index	find_smallest_from_top(t_node *head, int limit)
 {
 	t_index	first;
 	int		middle;
@@ -57,7 +57,7 @@ t_index	find_smallest_from_top(t_node *head, int ceiling)
 	first.index = -1;
 	while (tmp_head->value != middle)
 	{
-		if (tmp_head->value < ceiling)
+		if (tmp_head->value < limit)
 		{
 			first.index = 1;
 			first.value = tmp_head->value;
@@ -68,7 +68,7 @@ t_index	find_smallest_from_top(t_node *head, int ceiling)
 	return (first);
 }
 
-t_index	find_smallest_from_bottom(t_node *head, int ceiling)
+t_index	find_smallest_from_bottom(t_node *head, int limit)
 {
 	t_index	last;
 	int		middle;
@@ -83,7 +83,7 @@ t_index	find_smallest_from_bottom(t_node *head, int ceiling)
 		tmp_head = tmp_head->next;
 	while (tmp_head != NULL)
 	{
-		if (tmp_head->value < ceiling)
+		if (tmp_head->value < limit)
 		{
 			last.index = 1;
 			last.value = tmp_head->value;

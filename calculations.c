@@ -26,13 +26,13 @@ int	calculate_ratio(int n)
 		return (22);
 }
 
-int	calculate_ceiling(int ceiling, t_node *head_a)
+int	calculate_ceiling(int limit, t_node *head_a)
 {
 	int	ratio;
 
 	ratio = calculate_ratio(lst_size(head_a));
-	ceiling += (ratio * 2);
-	if (ceiling > find_third_highest_value(head_a))
-		ceiling = find_third_highest_value(head_a);
-	return (ceiling);
+	limit += (ratio * 2);
+	if (limit > find_third_highest_value(head_a))
+		limit = find_third_highest_value(head_a);
+	return (limit);
 }
