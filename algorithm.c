@@ -12,7 +12,8 @@
 
 #include "push_swap.h"
 
-/* calculate whether ra or rra is the shortest path */
+/* calculate whether ra or rra is the shortest path and rotate accordingly
+so that the target value is at the top of stack a */
 t_node	*ra_vs_rra(t_node *head, t_index first, t_index last)
 {
 	int	ra_count_top;
@@ -33,7 +34,9 @@ t_node	*ra_vs_rra(t_node *head, t_index first, t_index last)
 	return (head);
 }
 
-/* optimal move */
+/* find the smallest values and if index != -1 for first or last,
+meaning there's  at least one value smaller than limit left, 
+send it to ra_vs_rra to rotate until target value is at top of a  */
 t_node	*find_shortest_path(t_node *head, int limit)
 {
 	t_index	first;
@@ -46,6 +49,8 @@ t_node	*find_shortest_path(t_node *head, int limit)
 	return (head);
 }
 
+/* push from a to b and rotate the newly pushed value to the end 
+of the stack in case condition is fullfilled */
 t_node	*list_b_condition(t_node *head_b, t_node *head_a, int limit)
 {
 	int	ratio;
@@ -57,6 +62,8 @@ t_node	*list_b_condition(t_node *head_b, t_node *head_a, int limit)
 	return (head_b);
 }
 
+/* moving values from stack b back to a; 
+search for the largest value in b and calculate the shortest path */
 t_node	*move_to_a(t_node *head_a, t_node *head_b)
 {
 	t_index	max;
@@ -85,8 +92,11 @@ t_node	*move_to_a(t_node *head_a, t_node *head_b)
 	return (head_a);
 }
 
-/* limit > find_third_highest_value only relevant in the end*/
-/* we want the last 3 values to remain in the head */
+/* limit > find_third_highest_value only relevant in the end, because 
+we want the last 3 values to remain in the head;
+index for first & last determined by find_smallest_from_top/bottom only
+set to -1 if there's no value below the limit left in a;
+if index = -1 return to outer loop to increase limit and repeat process */
 t_node	*insertion(t_node *head_a)
 {
 	int		limit;
@@ -98,7 +108,7 @@ t_node	*insertion(t_node *head_a)
 	limit = find_smallest_number(head_a);
 	while (lst_size(head_a) > 3)
 	{
-		limit = calculate_ceiling(limit, head_a);
+		limit = calculate_limit(limit, head_a);
 		first = find_smallest_from_top(head_a, limit);
 		last = find_smallest_from_bottom(head_a, limit);
 		while ((lst_size(head_a) > 3 && first.index != -1)

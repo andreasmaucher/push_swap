@@ -96,7 +96,6 @@ bool	check_valid_input(int ac, char **av)
 	return (true);
 }
 
-/* if no parameters specified give control back to the user */
 int	main(int ac, char **av)
 {
 	t_node	*head_a;

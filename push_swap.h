@@ -53,7 +53,7 @@ int				find_third_highest_value(t_node *head);
 int				find_smallest_number(t_node *head);
 /*calculations*/
 int				calculate_ratio(int n);
-int				calculate_ceiling(int limit, t_node *head_a);
+int				calculate_limit(int limit, t_node *head_a);
 /*move counter*/
 int				rotate_counter(t_node *head, t_index min_max);
 int				reverse_rotate_counter(t_node *head, t_index target);

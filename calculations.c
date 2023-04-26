@@ -12,6 +12,8 @@
 
 #include "push_swap.h"
 
+/* last case is optimized for 500 values; to get better results for stacks
+in the range of 100+ to 400 the ratio should be lowered */
 int	calculate_ratio(int n)
 {
 	if (n < 10)
@@ -26,7 +28,8 @@ int	calculate_ratio(int n)
 		return (22);
 }
 
-int	calculate_ceiling(int limit, t_node *head_a)
+/* the size of chunks is determined by ratio * 2 / listsize */
+int	calculate_limit(int limit, t_node *head_a)
 {
 	int	ratio;
 

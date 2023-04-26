@@ -30,6 +30,7 @@ int	rotate_counter(t_node *head, t_index min_max)
 	return (counter);
 }
 
+/* count reverse rotations */
 int	reverse_rotate_counter(t_node *head, t_index target)
 {
 	t_node	*temp_head;

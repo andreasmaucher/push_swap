@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 
+/* checks whether the user input is only digits */
 bool	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
@@ -19,6 +20,7 @@ bool	ft_isdigit(int c)
 	return (false);
 }
 
+/* used for checking the user input for duplicates */
 bool	loop_for_duplicates(long int *array, long int c, int ac)
 {
 	int		i;
@@ -33,6 +35,7 @@ bool	loop_for_duplicates(long int *array, long int c, int ac)
 	return (true);
 }
 
+/* returns the value at the middle of the stack*/
 int	return_middle_value(t_node *head, int lsize)
 {
 	t_node	*tmp;
