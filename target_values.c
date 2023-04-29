@@ -44,13 +44,15 @@ int	find_smallest_number(t_node *head)
 	return (min);
 }
 
-t_index	find_smallest_from_top(t_node *head, int limit)
+t_index	find_smallest_from_top(t_node *head, int limit, t_index first)
 {
-	t_index	first;
+	//t_index	first;
 	int		middle;
 	int		lsize;
 	t_node	*tmp_head;
 
+	//first = NULL;
+	//first.value = 0; //
 	tmp_head = head;
 	lsize = lst_size(head);
 	middle = return_middle_value(head, lsize);
@@ -68,7 +70,59 @@ t_index	find_smallest_from_top(t_node *head, int limit)
 	return (first);
 }
 
-t_index	find_smallest_from_bottom(t_node *head, int limit)
+t_index	find_smallest_from_bottom(t_node *head, int limit, t_index last)
+{
+	//t_index	last;
+	int		middle;
+	int		lsize;
+	t_node	*tmp_head;
+
+	//last.value = 0; //
+	tmp_head = head;
+	lsize = lst_size(head);
+	middle = return_middle_value(head, lsize);
+	last.index = -1;
+	while (tmp_head->value != middle)
+		tmp_head = tmp_head->next;
+	while (tmp_head != NULL)
+	{
+		if (tmp_head->value < limit)
+		{
+			last.index = 1;
+			last.value = tmp_head->value;
+		}
+		tmp_head = tmp_head->next;
+	}
+	return (last);
+}
+
+t_index	find_smallest_from_top_without(t_node *head, int limit)
+{
+	t_index	first;
+	int		middle;
+	int		lsize;
+	t_node	*tmp_head;
+
+	//first.value = 0; //
+	tmp_head = head;
+	lsize = lst_size(head);
+	middle = return_middle_value(head, lsize);
+	first.index = -1;
+	while (tmp_head->value != middle)
+	{
+		if (tmp_head->value < limit)
+		{
+			first.index = 1;
+			first.value = tmp_head->value;
+			return (first);
+		}
+		tmp_head = tmp_head->next;
+	}
+	return (first);
+}
+
+//!issue valgrind
+t_index	find_smallest_from_bottom_without(t_node *head, int limit)
 {
 	t_index	last;
 	int		middle;
@@ -79,6 +133,7 @@ t_index	find_smallest_from_bottom(t_node *head, int limit)
 	lsize = lst_size(head);
 	middle = return_middle_value(head, lsize);
 	last.index = -1;
+	//last.value = 0;
 	while (tmp_head->value != middle)
 		tmp_head = tmp_head->next;
 	while (tmp_head != NULL)

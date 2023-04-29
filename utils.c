@@ -59,13 +59,13 @@ bool	check_if_sorted(t_node *head)
 /* to free up all memory in the end*/
 void	freememory(t_node *head)
 {
-	t_node	*t_nodeo_delete;
+	t_node	*delete;
 
-	while (head != NULL)
+	while (lst_size(head) > 0) //head != NULL
 	{
-		t_nodeo_delete = head;
+		delete = head;
 		head = head->next;
-		free(t_nodeo_delete);
+		free(delete);
 	}
 }
 

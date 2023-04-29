@@ -105,17 +105,18 @@ int	main(int ac, char **av)
 		return (0);
 	if (check_valid_input(ac - 1, av) == false)
 		return (write(1, "Error\n", 6));
-	head_a = NULL;
 	i = ac - 1;
+	head_a = NULL;
 	head_a = create_new_list(head_a, i, av);
 	if (check_if_sorted(head_a) == false)
 	{
 		if (lst_size(head_a) == 2)
 			head_a = two_sorter(head_a);
-		else if (lst_size(head_a) >= 3)
+		if (lst_size(head_a) == 3)
 			head_a = three_sorter(head_a);
-		else if (lst_size(head_a) > 4)
+		if (lst_size(head_a) >= 4)
 			head_a = insertion(head_a);
 	}
+	printlist(head_a); //!uncomment!!!
 	freememory(head_a);
 }

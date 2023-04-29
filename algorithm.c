@@ -42,8 +42,8 @@ t_node	*find_shortest_path(t_node *head, int limit)
 	t_index	first;
 	t_index	last;
 
-	first = find_smallest_from_top(head, limit);
-	last = find_smallest_from_bottom(head, limit);
+	first = find_smallest_from_top_without(head, limit);
+	last = find_smallest_from_bottom_without(head, limit);
 	if (first.index != -1 || last.index != -1)
 		head = ra_vs_rra(head, first, last);
 	return (head);
@@ -101,24 +101,24 @@ t_node	*insertion(t_node *head_a)
 {
 	int		limit;
 	t_node	*head_b;
-	t_index	first;
-	t_index	last;
+	t_index	first; //!
+	t_index	last; //!
 
 	head_b = creating_list_b(head_a);
 	limit = find_smallest_number(head_a);
 	while (lst_size(head_a) > 3)
 	{
 		limit = calculate_limit(limit, head_a);
-		first = find_smallest_from_top(head_a, limit);
-		last = find_smallest_from_bottom(head_a, limit);
+		first = find_smallest_from_top(head_a, limit, first); //!
+		last = find_smallest_from_bottom(head_a, limit, last); //!
 		while ((lst_size(head_a) > 3 && first.index != -1)
 			|| (lst_size(head_a) > 3 && last.index != -1))
 		{
 			head_a = find_shortest_path(head_a, limit);
 			head_b = list_b_condition(head_b, head_a, limit);
 			head_a = delete_at_head(head_a);
-			first = find_smallest_from_top(head_a, limit);
-			last = find_smallest_from_bottom(head_a, limit);
+			first = find_smallest_from_top(head_a, limit, first);//!
+			last = find_smallest_from_bottom(head_a, limit, last);//!
 		}
 	}
 	head_a = move_to_a(head_a, head_b);

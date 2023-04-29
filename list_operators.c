@@ -25,11 +25,11 @@ t_node	*create_new_node(int value)
 }
 
 /* we use a double pointer because we want to change the value of a pointer */
-t_node	*new_list_insert_at_head(t_node **head, t_node *t_nodeo_insert)
+t_node	*new_list_insert_at_head(t_node **head, t_node *t_node_insert)
 {
-	t_nodeo_insert->next = *head;
-	*head = t_nodeo_insert;
-	return (t_nodeo_insert);
+	t_node_insert->next = *head;
+	*head = t_node_insert;
+	return (t_node_insert);
 }
 
 t_node	*insert_at_head(t_node *head, int new_value)
@@ -60,10 +60,7 @@ t_node	*insert_at_tail(t_node *head, int new_value)
 	t_node	*new_node;
 	t_node	*current;
 
-	new_node = malloc(sizeof(t_node));
-	if (new_node == NULL)
-		return (NULL);
-	new_node->value = new_value;
+	new_node = create_new_node(new_value);
 	current = head;
 	while (current->next != NULL)
 		current = current->next;
