@@ -61,6 +61,7 @@ int				find_smallest_number(t_node *head);
 int				find_third_highest_value(t_node *head);
 
 /*sorter*/
+t_node			*two_sorter(t_node *head);
 t_node			*three_sorter(t_node *h);
 t_node			*creating_list_b(t_node *head_a);
 
