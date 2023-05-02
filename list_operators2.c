@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-/* only for testing purposes */
+//only for testing purposes
 void	printlist(t_node *head)
 {
 	t_node	*temporary;
@@ -39,7 +39,7 @@ t_node	*delete_at_tail(t_node *head)
 		current = current->next;
 	}
 	prev->next = NULL;
-	//free(current); //!
+	free(current);
 	return (head);
 }
 
@@ -63,13 +63,7 @@ t_node	*delete_second_node(t_node *head)
 	t_node	*current;
 	t_node	*prev;
 
-	/* current = malloc(sizeof(t_node));
-	if (current == NULL)
-		return (NULL); */
 	current = head;
-	/* prev = malloc(sizeof(t_node));
-	if (prev == NULL)
-		return (NULL); */
 	prev = NULL;
 	while (current->next != NULL)
 	{
@@ -77,7 +71,6 @@ t_node	*delete_second_node(t_node *head)
 		current = current->next;
 	}
 	prev->next = NULL;
-	//free(current);
 	return (head);
 }
 

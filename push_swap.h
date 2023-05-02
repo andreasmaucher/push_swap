@@ -98,7 +98,7 @@ t_node			*move_to_a(t_node *head_a, t_node *head_b);
 t_node			*insertion(t_node *head_a);
 
 /*ft_split*/
-char			**ft_split(char const *s, char c);
+//char			**ft_split(char const *s, char c);
 
 t_index			find_largest_value(t_node *head);
 t_index			find_smallest_from_top(t_node *head, int limit, t_index first);

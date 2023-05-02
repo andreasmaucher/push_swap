@@ -34,19 +34,20 @@ t_node	*three_sorter(t_node *h)
 		s = h->next;
 		if (h->value < t->value && h->value > s->value && s->value < t->value)
 			h = swap_a(h);
-		if (h->value > t->value && h->value > s->value && s->value > t->value)
+		else if (h->value > t->value && h->value > s->value && s->value > t->value)
 		{
 			h = swap_a(h);
 			h = reverse_rotate_a(h);
 		}
-		if (h->value > t->value && h->value > s->value && s->value < t->value)
+		//t = return_tail_value(h);
+		else if (h->value > t->value && h->value > s->value && s->value < t->value)
 			h = rotate_a(h);
-		if (h->value < t->value && h->value < s->value && s->value > t->value)
+		else if (h->value < t->value && h->value < s->value && s->value > t->value)
 		{
 			h = swap_a(h);
 			h = rotate_a(h);
 		}
-		if (h->value > t->value && h->value < s->value && s->value > t->value)
+		else if (h->value > t->value && h->value < s->value && s->value > t->value)
 			h = reverse_rotate_a(h);
 	}
 	return (h);

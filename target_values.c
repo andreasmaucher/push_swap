@@ -51,8 +51,6 @@ t_index	find_smallest_from_top(t_node *head, int limit, t_index first)
 	int		lsize;
 	t_node	*tmp_head;
 
-	//first = NULL;
-	//first.value = 0; //
 	tmp_head = head;
 	lsize = lst_size(head);
 	middle = return_middle_value(head, lsize);
@@ -141,7 +139,7 @@ t_index	find_smallest_from_bottom_without(t_node *head, int limit)
 		{
 			last.index = 1;
 			last.value = tmp_head->value;
-			return (last); //! does this change anything???
+			return (last);
 		}
 		tmp_head = tmp_head->next;
 	}

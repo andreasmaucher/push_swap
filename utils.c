@@ -61,7 +61,7 @@ void	freememory(t_node *head)
 {
 	t_node	*delete;
 
-	while (lst_size(head) > 0) //head != NULL
+	while (lst_size(head) > 0)
 	{
 		delete = head;
 		head = head->next;
