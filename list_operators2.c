@@ -39,7 +39,7 @@ t_node	*delete_at_tail(t_node *head)
 		current = current->next;
 	}
 	prev->next = NULL;
-	free(current);
+	//free(current); //!
 	return (head);
 }
 
@@ -63,13 +63,13 @@ t_node	*delete_second_node(t_node *head)
 	t_node	*current;
 	t_node	*prev;
 
-	current = malloc(sizeof(t_node));
+	/* current = malloc(sizeof(t_node));
 	if (current == NULL)
-		return (NULL);
+		return (NULL); */
 	current = head;
-	prev = malloc(sizeof(t_node));
+	/* prev = malloc(sizeof(t_node));
 	if (prev == NULL)
-		return (NULL);
+		return (NULL); */
 	prev = NULL;
 	while (current->next != NULL)
 	{
@@ -77,7 +77,7 @@ t_node	*delete_second_node(t_node *head)
 		current = current->next;
 	}
 	prev->next = NULL;
-	free(current);
+	//free(current);
 	return (head);
 }
 

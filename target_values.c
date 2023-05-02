@@ -103,7 +103,7 @@ t_index	find_smallest_from_top_without(t_node *head, int limit)
 	int		lsize;
 	t_node	*tmp_head;
 
-	//first.value = 0; //
+	first.value = 0;
 	tmp_head = head;
 	lsize = lst_size(head);
 	middle = return_middle_value(head, lsize);
@@ -121,7 +121,6 @@ t_index	find_smallest_from_top_without(t_node *head, int limit)
 	return (first);
 }
 
-//!issue valgrind
 t_index	find_smallest_from_bottom_without(t_node *head, int limit)
 {
 	t_index	last;
@@ -133,7 +132,7 @@ t_index	find_smallest_from_bottom_without(t_node *head, int limit)
 	lsize = lst_size(head);
 	middle = return_middle_value(head, lsize);
 	last.index = -1;
-	//last.value = 0;
+	last.value = tmp_head->value;
 	while (tmp_head->value != middle)
 		tmp_head = tmp_head->next;
 	while (tmp_head != NULL)
@@ -142,6 +141,7 @@ t_index	find_smallest_from_bottom_without(t_node *head, int limit)
 		{
 			last.index = 1;
 			last.value = tmp_head->value;
+			return (last); //! does this change anything???
 		}
 		tmp_head = tmp_head->next;
 	}

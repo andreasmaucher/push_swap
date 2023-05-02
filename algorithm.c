@@ -33,7 +33,7 @@ t_node	*ra_vs_rra(t_node *head, t_index first, t_index last)
 	}
 	return (head);
 }
-
+//! try to print first & last in the f description
 /* find the smallest values and if index != -1 for first or last,
 meaning there's  at least one value smaller than limit left, 
 send it to ra_vs_rra to rotate until target value is at top of a  */
