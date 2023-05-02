@@ -117,6 +117,5 @@ int	main(int ac, char **av)
 		if (lst_size(head_a) >= 4)
 			head_a = insertion(head_a);
 	}
-	printlist(head_a); //!
 	freememory(head_a);
 }

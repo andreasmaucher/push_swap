@@ -22,6 +22,20 @@ t_node	*two_sorter(t_node *head)
 	return (head);
 }
 
+t_node	*three_sorter_helper(t_node *h)
+{
+	h = swap_a(h);
+	h = rotate_a(h);
+	return (h);
+}
+
+t_node	*three_sorter_helper2(t_node *h)
+{
+	h = swap_a(h);
+	h = reverse_rotate_a(h);
+	return (h);
+}
+
 /* h = head, t = tail node, s = second node */
 t_node	*three_sorter(t_node *h)
 {
@@ -34,20 +48,17 @@ t_node	*three_sorter(t_node *h)
 		s = h->next;
 		if (h->value < t->value && h->value > s->value && s->value < t->value)
 			h = swap_a(h);
-		else if (h->value > t->value && h->value > s->value && s->value > t->value)
-		{
-			h = swap_a(h);
-			h = reverse_rotate_a(h);
-		}
-		//t = return_tail_value(h);
-		else if (h->value > t->value && h->value > s->value && s->value < t->value)
+		else if (h->value > t->value && h->value > s->value
+			&& s->value > t->value)
+			h = three_sorter_helper2(h);
+		else if (h->value > t->value && h->value > s->value
+			&& s->value < t->value)
 			h = rotate_a(h);
-		else if (h->value < t->value && h->value < s->value && s->value > t->value)
-		{
-			h = swap_a(h);
-			h = rotate_a(h);
-		}
-		else if (h->value > t->value && h->value < s->value && s->value > t->value)
+		else if (h->value < t->value && h->value < s->value
+			&& s->value > t->value)
+			h = three_sorter_helper(h);
+		else if (h->value > t->value && h->value < s->value
+			&& s->value > t->value)
 			h = reverse_rotate_a(h);
 	}
 	return (h);

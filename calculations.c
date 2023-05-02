@@ -39,3 +39,55 @@ int	calculate_limit(int limit, t_node *head_a)
 		limit = find_third_highest_value(head_a);
 	return (limit);
 }
+
+t_index	find_smallest_from_top_without(t_node *head, int limit)
+{
+	t_index	first;
+	int		middle;
+	int		lsize;
+	t_node	*tmp_head;
+
+	first.value = 0;
+	tmp_head = head;
+	lsize = lst_size(head);
+	middle = return_middle_value(head, lsize);
+	first.index = -1;
+	while (tmp_head->value != middle)
+	{
+		if (tmp_head->value < limit)
+		{
+			first.index = 1;
+			first.value = tmp_head->value;
+			return (first);
+		}
+		tmp_head = tmp_head->next;
+	}
+	return (first);
+}
+
+t_index	find_smallest_from_bottom_without(t_node *head, int limit)
+{
+	t_index	last;
+	int		middle;
+	int		lsize;
+	t_node	*tmp_head;
+
+	tmp_head = head;
+	lsize = lst_size(head);
+	middle = return_middle_value(head, lsize);
+	last.index = -1;
+	last.value = tmp_head->value;
+	while (tmp_head->value != middle)
+		tmp_head = tmp_head->next;
+	while (tmp_head != NULL)
+	{
+		if (tmp_head->value < limit)
+		{
+			last.index = 1;
+			last.value = tmp_head->value;
+			return (last);
+		}
+		tmp_head = tmp_head->next;
+	}
+	return (last);
+}
